@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
     
-    <!-- SEO -->
     <title>مدرسة الجيل الجديد | رؤية 2027 - تعليم يبني أجيالاً</title>
     <meta name="description" content="مدرسة الجيل الجديد - منذ 1987. رؤية 2027 لتطوير التعليم. من KG حتى الثالث الإعدادي. احجز مكان لابنك الآن.">
     <meta name="keywords" content="مدرسة, الجيل الجديد, رؤية 2027, تعليم, تجديد, مناهج, ذكاء اصطناعي, معامل, ملعب, جيم, مصر">
@@ -15,7 +14,6 @@
     <meta property="og:type" content="website">
     <meta name="theme-color" content="#0D1B2A">
     
-    <!-- Google Fonts: Cairo -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -43,11 +41,7 @@
             --success: #2ecc71;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html {
             scroll-behavior: smooth;
@@ -72,7 +66,6 @@
             position: relative;
         }
 
-        /* ============ أنيميشن ============ */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -80,10 +73,6 @@
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
-        }
-        @keyframes slideRight {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
         }
         @keyframes pulse-border {
             0%,100% { border-color: var(--accent); box-shadow: 0 0 0 0 rgba(199,125,90,0.4); }
@@ -110,7 +99,6 @@
             to { opacity: 1; }
         }
 
-        /* ============ هيدر زجاجي ============ */
         .site-header {
             background: var(--glass-bg);
             backdrop-filter: blur(14px);
@@ -214,13 +202,6 @@
             letter-spacing: 0.3px;
         }
 
-        .nav-cta:hover,
-        .nav-cta:active {
-            background: var(--accent-light) !important;
-            transform: scale(1.04);
-        }
-
-        /* ============ شريط رؤية 2027 ============ */
         .vision-strip {
             background: linear-gradient(135deg, #0D1B2A, #1B2D44, #0D1B2A);
             padding: 8px 14px;
@@ -256,7 +237,6 @@
             color: var(--accent-light);
         }
 
-        /* ============ الأقسام ============ */
         .section {
             padding: 20px 14px;
             animation: fadeInUp 0.6s ease forwards;
@@ -293,7 +273,6 @@
             margin: 6px auto 0;
         }
 
-        /* ============ CTA ============ */
         .cta-button {
             display: block;
             width: 100%;
@@ -319,32 +298,12 @@
             font-family: 'Cairo', sans-serif;
         }
 
-        .cta-button::after,
-        .cta-button::before {
-            content: '✨';
-            animation: float 1.5s ease-in-out infinite;
-            display: inline-block;
-        }
-        .cta-button::after { margin-right: 6px; }
-        .cta-button::before { margin-left: 6px; animation-delay: 0.5s; }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(199,125,90,0.55);
-        }
-
-        .cta-button:active {
-            transform: scale(0.96);
-            box-shadow: 0 3px 12px rgba(199,125,90,0.5);
-        }
-
         .cta-wrapper {
             padding: 8px 14px 16px;
             animation: fadeInUp 0.7s ease forwards;
             width: 100%;
         }
 
-        /* ============ معلومات سريعة ============ */
         .quick-info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -361,18 +320,6 @@
             cursor: default;
         }
 
-        .quick-info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(13,27,42,0.1);
-            border-color: var(--accent);
-        }
-
-        .quick-info-card:active {
-            background: #FDF5F0;
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-
         .quick-info-icon {
             font-size: 26px;
             display: block;
@@ -386,17 +333,12 @@
             display: block;
         }
 
-        .quick-info-number.accent {
-            color: var(--accent-dark);
-        }
-
         .quick-info-label {
             font-size: 10.5px;
             color: var(--text-muted);
             font-weight: 600;
         }
 
-        /* ============ المراحل الدراسية ============ */
         .grades-container {
             display: flex;
             flex-wrap: wrap;
@@ -417,29 +359,12 @@
             white-space: nowrap;
         }
 
-        .grade-tag:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 18px rgba(13,27,42,0.12);
-        }
-
-        .grade-tag:active {
-            background: var(--navy);
-            color: #FFF;
-            border-color: var(--navy);
-            transform: translateY(-2px);
-        }
-
         .grade-tag.highlight {
             background: var(--navy);
             color: var(--accent-light);
             border-color: var(--navy);
         }
 
-        .grade-tag.highlight:hover {
-            background: var(--navy-light);
-        }
-
-        /* ============ رؤية 2027 ============ */
         .vision-cards {
             display: flex;
             flex-direction: column;
@@ -454,30 +379,6 @@
             border-right: 5px solid var(--accent);
             transition: all 0.4s;
             cursor: default;
-        }
-
-        .vision-card.reveal {
-            opacity: 0;
-            transform: translateX(25px);
-            transition: all 0.5s ease;
-        }
-
-        .vision-card.reveal.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .vision-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 28px rgba(13,27,42,0.1);
-            border-right-color: var(--navy);
-            background: #FFFDF9;
-        }
-
-        .vision-card:active {
-            background: #FDF5F0;
-            border-right-color: var(--navy);
-            transform: translateX(-2px) translateY(-2px);
         }
 
         .vision-card-num {
@@ -507,7 +408,6 @@
             line-height: 1.5;
         }
 
-        /* ============ إعلان التقديم ============ */
         .ad-wrapper {
             border-radius: var(--radius-lg);
             overflow: hidden;
@@ -522,7 +422,6 @@
             display: block;
         }
 
-        /* ============ معرض الصور ============ */
         .gallery-scroll {
             display: flex;
             gap: 10px;
@@ -537,7 +436,6 @@
         }
 
         .gallery-scroll::-webkit-scrollbar { display: none; }
-        .gallery-scroll:active { cursor: grabbing; }
 
         .gallery-slide {
             flex: 0 0 88%;
@@ -550,16 +448,6 @@
             aspect-ratio: 3 / 4;
             background: #E8DFD5;
             transition: all 0.35s;
-        }
-
-        .gallery-slide:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(13,27,42,0.18);
-        }
-
-        .gallery-slide.active {
-            border-color: var(--accent);
-            box-shadow: 0 6px 26px rgba(199,125,90,0.3);
         }
 
         .gallery-slide img {
@@ -590,7 +478,6 @@
             opacity: 0.7;
         }
 
-        /* ============ وسائل تواصل ============ */
         .contact-cards {
             display: flex;
             flex-direction: column;
@@ -610,35 +497,6 @@
             transition: all 0.35s;
             position: relative;
             overflow: hidden;
-        }
-
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--accent);
-            border-radius: 0 4px 4px 0;
-            transition: width 0.3s;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(199,125,90,0.15);
-            border-color: var(--accent);
-        }
-
-        .contact-card:active::before {
-            width: 100%;
-            opacity: 0.06;
-        }
-
-        .contact-card:active {
-            border-color: var(--accent);
-            transform: translateX(-2px) translateY(-2px);
-            box-shadow: 0 4px 16px rgba(199,125,90,0.2);
         }
 
         .contact-icon-circle {
@@ -664,11 +522,6 @@
             color: #FFF;
         }
 
-        .contact-icon-circle.phone {
-            background: var(--navy);
-            color: var(--accent-light);
-        }
-
         .contact-info {
             flex: 1;
             min-width: 0;
@@ -687,14 +540,6 @@
             word-break: break-all;
         }
 
-        .svg-arrow {
-            width: 16px;
-            height: 16px;
-            flex-shrink: 0;
-            color: var(--accent);
-        }
-
-        /* ============ فوتر ============ */
         .site-footer {
             background: var(--navy);
             color: #FFF;
@@ -738,7 +583,6 @@
             font-weight: 500;
         }
 
-        /* ============ الزر العائم ============ */
         .floating-inquiry-btn {
             position: fixed;
             bottom: 20px;
@@ -760,31 +604,10 @@
             animation: glowPulse 2.5s infinite;
             transition: all 0.3s ease;
             white-space: nowrap;
-            letter-spacing: 0.3px;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
             background: rgba(199, 125, 90, 0.95);
             border: 1.5px solid rgba(255,255,255,0.3);
         }
 
-        .floating-inquiry-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 28px rgba(199,125,90,0.7);
-            background: var(--accent-light);
-        }
-
-        .floating-inquiry-btn:active {
-            transform: scale(0.94);
-            background: var(--accent-dark);
-        }
-
-        .floating-inquiry-btn svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-        }
-
-        /* ============ مودال النموذج ============ */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -835,11 +658,6 @@
             z-index: 10;
         }
 
-        .modal-close:hover {
-            background: var(--danger);
-            transform: rotate(90deg);
-        }
-
         .modal-title {
             font-size: 20px;
             font-weight: 800;
@@ -862,9 +680,6 @@
             font-weight: 700;
             color: var(--navy);
             margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
 
         .form-group input,
@@ -908,12 +723,6 @@
             margin-top: 8px;
         }
 
-        .submit-btn:hover {
-            background: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(199,125,90,0.5);
-        }
-
         .submit-btn:disabled {
             opacity: 0.6;
             pointer-events: none;
@@ -953,7 +762,6 @@
 </head>
 <body>
 
-    <!-- ============ هيدر زجاجي ============ -->
     <header class="site-header" id="siteHeader">
         <div class="header-logo-area">
             <div class="logo-circle">
@@ -972,7 +780,6 @@
         </nav>
     </header>
 
-    <!-- ============ شريط رؤية 2027 ============ -->
     <div class="vision-strip">
         <div class="vision-strip-badge">
             <span class="vision-strip-icon">🎯</span>
@@ -981,12 +788,10 @@
     </div>
 
     <main>
-        <!-- CTA 1 -->
         <div class="cta-wrapper">
             <a href="#contact" class="cta-button">احجز مكان لابنك الآن</a>
         </div>
 
-        <!-- ============ معلومات سريعة ============ -->
         <section class="section" id="stats" aria-labelledby="stats-title">
             <div class="section-header">
                 <span class="section-badge">🏛️ عن المدرسة</span>
@@ -1001,7 +806,7 @@
                 </div>
                 <div class="quick-info-card">
                     <span class="quick-info-icon">🎓</span>
-                    <span class="quick-info-number accent">آلاف</span>
+                    <span class="quick-info-number" style="color:var(--accent-dark);">آلاف</span>
                     <span class="quick-info-label">من الخريجين</span>
                 </div>
                 <div class="quick-info-card">
@@ -1011,13 +816,12 @@
                 </div>
                 <div class="quick-info-card">
                     <span class="quick-info-icon">👨‍👩‍👧‍👦</span>
-                    <span class="quick-info-number accent">أجيال</span>
+                    <span class="quick-info-number" style="color:var(--accent-dark);">أجيال</span>
                     <span class="quick-info-label">من التفوق</span>
                 </div>
             </div>
         </section>
 
-        <!-- ============ المراحل الدراسية ============ -->
         <section class="section" style="padding-top:6px;" aria-labelledby="grades-title">
             <div class="section-header">
                 <span class="section-badge">📚 المراحل</span>
@@ -1040,19 +844,16 @@
             </div>
         </section>
 
-        <!-- CTA 2 -->
         <div class="cta-wrapper">
             <a href="#contact" class="cta-button">احجز مكان لابنك الآن</a>
         </div>
 
-        <!-- ============ إعلان التقديم ============ -->
         <section class="section" style="padding-top:4px;" aria-label="إعلان التقديم">
             <div class="ad-wrapper">
-                <img src="p1.JPG" alt="إعلان فتح باب التقديم للعام الدراسي الجديد" onerror="this.parentElement.innerHTML='<div style=background:var(--navy);color:#FFF;padding:32px;text-align:center;border-radius:16px;font-size:15px;font-weight:700;>📢 إعلان فتح باب التقديم</div>';">
+                <img src="p1.JPG" alt="إعلان فتح باب التقديم" onerror="this.parentElement.innerHTML='<div style=background:var(--navy);color:#FFF;padding:32px;text-align:center;border-radius:16px;font-size:15px;font-weight:700;>📢 إعلان فتح باب التقديم</div>';">
             </div>
         </section>
 
-        <!-- ============ رؤية 2027 ============ -->
         <section class="section" id="vision" aria-labelledby="vision-title">
             <div class="section-header">
                 <span class="section-badge">🚀 رؤية 2027</span>
@@ -1060,50 +861,20 @@
                 <div class="section-divider"></div>
             </div>
             <div class="vision-cards">
-                <div class="vision-card reveal">
-                    <span class="vision-card-num">1</span>
-                    <h3>تطوير تكنولوجي متقدم</h3>
-                    <p>تحديث البنية التحتية الرقمية على جميع الأصعدة التكنولوجية لتواكب أحدث المعايير العالمية.</p>
-                </div>
-                <div class="vision-card reveal">
-                    <span class="vision-card-num">2</span>
-                    <h3>تطوير وتجديد الإنشاءات والمرافق</h3>
-                    <p>إعادة تأهيل شاملة لمباني المدرسة ومرافقها الخدمية بأعلى معايير الجودة والسلامة.</p>
-                </div>
-                <div class="vision-card reveal">
-                    <span class="vision-card-num">3</span>
-                    <h3>طرق مبتكرة للتعلم</h3>
-                    <p>سيستم طلابي كامل، منصة ذكاء اصطناعي تعليمية، امتحانات إلكترونية يومية، مسابقات تفاعلية، متابعة ولي الأمر عن بُعد.</p>
-                </div>
-                <div class="vision-card reveal">
-                    <span class="vision-card-num">4</span>
-                    <h3>تجديد معامل العلوم والوسائط</h3>
-                    <p>مسرح للتطور التعليمي يشهد على تاريخ حافل بالإنجازات توالت عليه الأجيال وتعاقبت عليه السنين.</p>
-                </div>
-                <div class="vision-card reveal">
-                    <span class="vision-card-num">5</span>
-                    <h3>تجديد ملعب كرة القدم وألعاب تنافسية</h3>
-                    <p>باقة من الألعاب التنافسية المحفزة للطالب تعزز روح الفريق والقيادة والمهارات البدنية.</p>
-                </div>
-                <div class="vision-card reveal">
-                    <span class="vision-card-num">6</span>
-                    <h3>نظام مسابقات مبتكر</h3>
-                    <p>يمنح المادة العلمية قيمتها النظرية والعملية عبر تحديات ومسابقات محفزة على الإبداع والتميز.</p>
-                </div>
-                <div class="vision-card reveal">
-                    <span class="vision-card-num">7</span>
-                    <h3>خطة إنشاء صالة جيم متكاملة</h3>
-                    <p>خطوة طموحة تهدف إلى بناء صحة الطلاب البدنية ضمن بيئة رياضية شاملة ومتكاملة.</p>
-                </div>
+                <div class="vision-card"><span class="vision-card-num">1</span><h3>تطوير تكنولوجي متقدم</h3><p>تحديث البنية التحتية الرقمية على جميع الأصعدة التكنولوجية لتواكب أحدث المعايير العالمية.</p></div>
+                <div class="vision-card"><span class="vision-card-num">2</span><h3>تطوير وتجديد الإنشاءات والمرافق</h3><p>إعادة تأهيل شاملة لمباني المدرسة ومرافقها الخدمية بأعلى معايير الجودة والسلامة.</p></div>
+                <div class="vision-card"><span class="vision-card-num">3</span><h3>طرق مبتكرة للتعلم</h3><p>سيستم طلابي كامل، منصة ذكاء اصطناعي تعليمية، امتحانات إلكترونية يومية، مسابقات تفاعلية، متابعة ولي الأمر عن بُعد.</p></div>
+                <div class="vision-card"><span class="vision-card-num">4</span><h3>تجديد معامل العلوم والوسائط</h3><p>مسرح للتطور التعليمي يشهد على تاريخ حافل بالإنجازات توالت عليه الأجيال وتعاقبت عليه السنين.</p></div>
+                <div class="vision-card"><span class="vision-card-num">5</span><h3>تجديد ملعب كرة القدم وألعاب تنافسية</h3><p>باقة من الألعاب التنافسية المحفزة للطالب تعزز روح الفريق والقيادة والمهارات البدنية.</p></div>
+                <div class="vision-card"><span class="vision-card-num">6</span><h3>نظام مسابقات مبتكر</h3><p>يمنح المادة العلمية قيمتها النظرية والعملية عبر تحديات ومسابقات محفزة على الإبداع والتميز.</p></div>
+                <div class="vision-card"><span class="vision-card-num">7</span><h3>خطة إنشاء صالة جيم متكاملة</h3><p>خطوة طموحة تهدف إلى بناء صحة الطلاب البدنية ضمن بيئة رياضية شاملة ومتكاملة.</p></div>
             </div>
         </section>
 
-        <!-- CTA 3 -->
         <div class="cta-wrapper">
             <a href="#contact" class="cta-button">احجز مكان لابنك الآن</a>
         </div>
 
-        <!-- ============ معرض الصور ============ -->
         <section class="section" id="gallery" style="padding-top:8px;" aria-labelledby="gallery-title">
             <div class="section-header">
                 <span class="section-badge">📸 معرض الصور</span>
@@ -1111,41 +882,21 @@
                 <div class="section-divider"></div>
             </div>
             <div class="gallery-scroll" id="galleryScroll" role="region" aria-label="معرض صور المدرسة">
-                <div class="gallery-slide" role="group" aria-label="صورة 1">
-                    <img src="A.JPG" alt="تمرين كراتيه - أنشطة رياضية" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=background:var(--navy);color:#FFF;display:flex;align-items:center;justify-content:center;height:100%;font-size:13px;border-radius:16px;>A.JPG - كراتيه</div>';">
-                    <div class="gallery-caption">🥋 أنشطة رياضية متنوعة تنمي مهارات الطالب</div>
-                </div>
-                <div class="gallery-slide" role="group" aria-label="صورة 2">
-                    <img src="B.PNG" alt="نشاط مدرسي" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=background:var(--navy-light);color:#FFF;display:flex;align-items:center;justify-content:center;height:100%;font-size:13px;border-radius:16px;>B.PNG</div>';">
-                </div>
-                <div class="gallery-slide" role="group" aria-label="صورة 3">
-                    <img src="C.PNG" alt="عرض بروجيكتور - تكنولوجيا" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=background:var(--navy);color:#FFF;display:flex;align-items:center;justify-content:center;height:100%;font-size:13px;border-radius:16px;>C.PNG - بروجيكتور</div>';">
-                    <div class="gallery-caption">💻 أحدث الوسائل التكنولوجية للتعلم</div>
-                </div>
-                <div class="gallery-slide" role="group" aria-label="صورة 4">
-                    <img src="D.JPG" alt="تجربة معمل علوم" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=background:var(--navy-light);color:#FFF;display:flex;align-items:center;justify-content:center;height:100%;font-size:13px;border-radius:16px;>D.JPG - معمل علوم</div>';">
-                    <div class="gallery-caption">🔬 فصل متميز من العلوم الأساسية النظرية والعملية</div>
-                </div>
-                <div class="gallery-slide" role="group" aria-label="صورة 5">
-                    <img src="E.JPG" alt="صورة مدرسية" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=background:var(--navy);color:#FFF;display:flex;align-items:center;justify-content:center;height:100%;font-size:13px;border-radius:16px;>E.JPG</div>';">
-                </div>
-                <div class="gallery-slide" role="group" aria-label="صورة 6">
-                    <img src="F.PNG" alt="صورة مدرسية" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=background:var(--navy-light);color:#FFF;display:flex;align-items:center;justify-content:center;height:100%;font-size:13px;border-radius:16px;>F.PNG</div>';">
-                </div>
-                <div class="gallery-slide" role="group" aria-label="صورة 7">
-                    <img src="G.JPG" alt="رحلة مدرسية" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=background:var(--navy);color:#FFF;display:flex;align-items:center;justify-content:center;height:100%;font-size:13px;border-radius:16px;>G.JPG - رحلة</div>';">
-                    <div class="gallery-caption">🧳 رحلات ترفيهية في معالم سياحية على أرقى مستوى في مصر</div>
-                </div>
+                <div class="gallery-slide"><img src="A.JPG" alt="تمرين كراتيه" loading="lazy"><div class="gallery-caption">🥋 أنشطة رياضية متنوعة</div></div>
+                <div class="gallery-slide"><img src="B.PNG" alt="نشاط مدرسي" loading="lazy"></div>
+                <div class="gallery-slide"><img src="C.PNG" alt="عرض بروجيكتور" loading="lazy"><div class="gallery-caption">💻 أحدث الوسائل التكنولوجية</div></div>
+                <div class="gallery-slide"><img src="D.JPG" alt="تجربة معمل علوم" loading="lazy"><div class="gallery-caption">🔬 معمل علوم متطور</div></div>
+                <div class="gallery-slide"><img src="E.JPG" alt="صورة مدرسية" loading="lazy"></div>
+                <div class="gallery-slide"><img src="F.PNG" alt="صورة مدرسية" loading="lazy"></div>
+                <div class="gallery-slide"><img src="G.JPG" alt="رحلة مدرسية" loading="lazy"><div class="gallery-caption">🧳 رحلات ترفيهية مميزة</div></div>
             </div>
             <div class="gallery-hint" aria-hidden="true">⇠ اسحب لمشاهدة كل الصور</div>
         </section>
 
-        <!-- CTA 4 -->
         <div class="cta-wrapper">
             <a href="#contact" class="cta-button">احجز مكان لابنك الآن</a>
         </div>
 
-        <!-- ============ وسائل التواصل ============ -->
         <section class="section" id="contact" aria-labelledby="contact-title">
             <div class="section-header">
                 <span class="section-badge">📞 تواصل معنا</span>
@@ -1153,76 +904,50 @@
                 <div class="section-divider"></div>
             </div>
             <div class="contact-cards">
-                <a href="tel:01279039354" class="contact-card" aria-label="هاتف رئيسي - 01279039354">
-                    <div class="contact-icon-circle phone">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                <a href="tel:01279039354" class="contact-card">
+                    <div class="contact-icon-circle">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                     </div>
-                    <div class="contact-info">
-                        <div class="contact-label">هاتف رئيسي</div>
-                        <div class="contact-value">01279039354</div>
-                    </div>
-                    <svg class="svg-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    <div class="contact-info"><div class="contact-label">هاتف رئيسي</div><div class="contact-value">01279039354</div></div>
                 </a>
-                <a href="tel:01279038803" class="contact-card" aria-label="هاتف بديل - 01279038803">
-                    <div class="contact-icon-circle phone">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                <a href="tel:01279038803" class="contact-card">
+                    <div class="contact-icon-circle">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                     </div>
-                    <div class="contact-info">
-                        <div class="contact-label">هاتف بديل</div>
-                        <div class="contact-value">01279038803</div>
-                    </div>
-                    <svg class="svg-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    <div class="contact-info"><div class="contact-label">هاتف بديل</div><div class="contact-value">01279038803</div></div>
                 </a>
-                <a href="tel:0233510813" class="contact-card" aria-label="أرضي - 0233510813">
-                    <div class="contact-icon-circle phone">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                <a href="tel:0233510813" class="contact-card">
+                    <div class="contact-icon-circle">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="2" width="16" height="20" rx="2"/></svg>
                     </div>
-                    <div class="contact-info">
-                        <div class="contact-label">أرضي</div>
-                        <div class="contact-value">0233510813</div>
-                    </div>
-                    <svg class="svg-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    <div class="contact-info"><div class="contact-label">أرضي</div><div class="contact-value">0233510813</div></div>
                 </a>
-                <a href="https://whatsapp.com/channel/0029VbCrq9A6RGJKchzS7L1J" target="_blank" rel="noopener" class="contact-card" aria-label="قناة واتساب">
+                <a href="https://whatsapp.com/channel/0029VbCrq9A6RGJKchzS7L1J" target="_blank" rel="noopener" class="contact-card">
                     <div class="contact-icon-circle whatsapp">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347"/></svg>
                     </div>
-                    <div class="contact-info">
-                        <div class="contact-label">قناة واتساب</div>
-                        <div class="contact-value">انضم لمتابعة آخر التحديثات</div>
-                    </div>
-                    <svg class="svg-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    <div class="contact-info"><div class="contact-label">قناة واتساب</div><div class="contact-value">انضم لمتابعة آخر التحديثات</div></div>
                 </a>
-                <a href="https://www.facebook.com/share/g/1DoKyP2srx/?mibextid=wwXIfr" target="_blank" rel="noopener" class="contact-card" aria-label="جروب فيسبوك">
+                <a href="https://www.facebook.com/share/g/1DoKyP2srx/" target="_blank" rel="noopener" class="contact-card">
                     <div class="contact-icon-circle facebook">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     </div>
-                    <div class="contact-info">
-                        <div class="contact-label">جروب فيسبوك</div>
-                        <div class="contact-value">انضم لعائلة الجيل الجديد</div>
-                    </div>
-                    <svg class="svg-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    <div class="contact-info"><div class="contact-label">جروب فيسبوك</div><div class="contact-value">انضم لعائلة الجيل الجديد</div></div>
                 </a>
-                <a href="https://www.facebook.com/share/1K38VLGuMc/?mibextid=wwXIfr" target="_blank" rel="noopener" class="contact-card" aria-label="صفحة فيسبوك">
+                <a href="https://www.facebook.com/share/1K38VLGuMc/" target="_blank" rel="noopener" class="contact-card">
                     <div class="contact-icon-circle facebook">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     </div>
-                    <div class="contact-info">
-                        <div class="contact-label">صفحة فيسبوك</div>
-                        <div class="contact-value">تابعنا على فيسبوك</div>
-                    </div>
-                    <svg class="svg-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                    <div class="contact-info"><div class="contact-label">صفحة فيسبوك</div><div class="contact-value">تابعنا على فيسبوك</div></div>
                 </a>
             </div>
         </section>
 
-        <!-- CTA أخير -->
         <div class="cta-wrapper">
             <a href="#contact" class="cta-button">احجز مكان لابنك الآن</a>
         </div>
     </main>
 
-    <!-- ============ فوتر ============ -->
     <footer class="site-footer" role="contentinfo">
         <div class="footer-brand">مدرسة الجيل الجديد</div>
         <div class="footer-tagline">تعليم يبني أجيالاً – منذ 1987</div>
@@ -1231,14 +956,12 @@
         <p class="footer-credit">💻 برمجة المهندس <strong>اسماعيل عماد</strong></p>
     </footer>
 
-    <!-- ============ Firebase Firestore SDKs ============ -->
+    <!-- ============ Firebase Firestore ============ -->
     <script type="module">
-        // Import Firestore functions
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-analytics.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
-        // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBPgtF_GqT95QkMwwoJMGiZWFPjHFdA_N0",
             authDomain: "manassa-oloom.firebaseapp.com",
@@ -1250,19 +973,69 @@
             measurementId: "G-F0N011WQB9"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
-        const db = getFirestore(app); // ⭐ Firestore بدل Realtime Database
+        const db = getFirestore(app);
 
-        // اسم الكوليكشن في Firestore
-        const COLLECTION_NAME = 'school_inquiries_2027';
+        const VISITORS_COLLECTION = 'site_visitors';
+        const INQUIRIES_COLLECTION = 'school_inquiries_2027';
+
+        // ============ تتبع الزوار - مباشر على Firestore ============
+        async function trackVisitor() {
+            try {
+                const now = new Date();
+                const fingerprint = navigator.userAgent + '|' + window.screen.width + 'x' + window.screen.height;
+                
+                const visitorData = {
+                    page: window.location.pathname || '/',
+                    fullUrl: window.location.href,
+                    referrer: document.referrer || 'direct',
+                    userAgent: navigator.userAgent,
+                    language: navigator.language,
+                    platform: navigator.platform,
+                    screenResolution: `${window.screen.width}x${window.screen.height}`,
+                    deviceType: /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent) ? 'mobile' : 'desktop',
+                    browser: getBrowserInfo(),
+                    timestamp: serverTimestamp(),
+                    visitDate: now.toISOString().split('T')[0],
+                    visitMonth: now.toISOString().substring(0, 7),
+                    visitWeek: getWeekNumber(now),
+                    visitHour: now.getHours(),
+                    visitMinute: now.getMinutes(),
+                    fingerprint: fingerprint.substring(0, 50)
+                };
+                
+                const docRef = await addDoc(collection(db, VISITORS_COLLECTION), visitorData);
+                console.log('✅ تم تسجيل الزيارة في Firestore:', docRef.id, '- الوقت:', now.toLocaleTimeString('ar-EG'));
+                
+            } catch (error) {
+                console.error('❌ فشل تسجيل الزيارة:', error.message);
+            }
+        }
         
-        // دالة محسنة لحفظ البيانات في Firestore
+        function getWeekNumber(date) {
+            const firstDay = new Date(date.getFullYear(), 0, 1);
+            const pastDays = (date - firstDay) / 86400000;
+            return `${date.getFullYear()}-W${Math.ceil((pastDays + firstDay.getDay() + 1) / 7)}`;
+        }
+        
+        function getBrowserInfo() {
+            const ua = navigator.userAgent;
+            if (ua.includes('Chrome')) return 'Chrome';
+            if (ua.includes('Firefox')) return 'Firefox';
+            if (ua.includes('Safari')) return 'Safari';
+            if (ua.includes('Edge')) return 'Edge';
+            return 'Other';
+        }
+
+        // تنفيذ تتبع الزائر فوراً عند تحميل الصفحة
+        trackVisitor();
+        console.log('👁️ نظام تتبع الزوار نشط على Firestore');
+
+        // ============ دالة حفظ الاستفسارات ============
         async function saveInquiry(data) {
             try {
-                // Firestore: إنشاء مرجع للكوليكشن وإضافة وثيقة جديدة تلقائياً
-                const docRef = await addDoc(collection(db, COLLECTION_NAME), {
+                const docRef = await addDoc(collection(db, INQUIRIES_COLLECTION), {
                     parentName: data.parentName,
                     phoneNumber: data.phoneNumber,
                     childAge: data.childAge,
@@ -1270,154 +1043,114 @@
                     inquiryText: data.inquiryText || 'لا يوجد استفسار',
                     createdAt: serverTimestamp(),
                     source: 'floating_button_website',
-                    userAgent: navigator.userAgent,
                     submittedAt: new Date().toISOString()
                 });
                 
-                console.log('✅ تم حفظ الاستفسار في Firestore برقم:', docRef.id);
+                console.log('✅ تم حفظ الاستفسار:', docRef.id);
                 return docRef.id;
             } catch (error) {
-                console.error('❌ فشل الحفظ في Firestore:', error);
-                console.error('تفاصيل الخطأ:', {
-                    code: error.code,
-                    message: error.message,
-                    stack: error.stack
-                });
+                console.error('❌ فشل حفظ الاستفسار:', error);
                 throw error;
             }
         }
 
-        // ============ إنشاء الزر العائم الديناميكي ============
-        function createFloatingButton() {
+        // ============ إنشاء الزر العائم والمودال ============
+        document.addEventListener('DOMContentLoaded', () => {
+            // زر عائم
             const btn = document.createElement('button');
             btn.className = 'floating-inquiry-btn';
-            btn.id = 'dynamicFloatingBtn';
             btn.innerHTML = `
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-                    <line x1="8" y1="9" x2="16" y2="9"/>
-                    <line x1="8" y1="13" x2="14" y2="13"/>
-                </svg>
-                استفسار أو تقديم
+                    <line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="14" y2="13"/>
+                </svg> استفسار أو تقديم
             `;
-            btn.setAttribute('aria-label', 'فتح نموذج الاستفسار والتقديم');
             document.body.appendChild(btn);
-            return btn;
-        }
 
-        // ============ إنشاء المودال ديناميكياً ============
-        function createModal() {
+            // مودال
             const overlay = document.createElement('div');
             overlay.className = 'modal-overlay hidden';
             overlay.id = 'inquiryModal';
-            
             overlay.innerHTML = `
                 <div class="modal-content">
-                    <button class="modal-close" id="closeModalBtn" aria-label="إغلاق النموذج">✕</button>
-                    <div class="modal-title">
-                        <span>📝</span> تقديم أو استفسار
-                    </div>
+                    <button class="modal-close" id="closeModalBtn">✕</button>
+                    <div class="modal-title"><span>📝</span> تقديم أو استفسار</div>
                     <form id="inquiryForm" novalidate>
                         <div class="form-group">
                             <label>👤 الاسم الكامل *</label>
-                            <input type="text" id="parentName" placeholder="اسم ولي الأمر" required autocomplete="name">
+                            <input type="text" id="parentName" placeholder="اسم ولي الأمر" required>
                             <div class="error-message" id="nameError">الرجاء إدخال الاسم</div>
                         </div>
                         <div class="form-group">
                             <label>📞 رقم الهاتف *</label>
-                            <input type="tel" id="phoneNumber" placeholder="01xxxxxxxxx" required dir="ltr" autocomplete="tel">
-                            <div class="error-message" id="phoneError">الرجاء إدخال رقم هاتف صحيح (مصري)</div>
+                            <input type="tel" id="phoneNumber" placeholder="01xxxxxxxxx" required dir="ltr">
+                            <div class="error-message" id="phoneError">الرجاء إدخال رقم هاتف صحيح</div>
                         </div>
                         <div class="form-group">
-                            <label>🧒 سن الطالب *</label>
+                            <label>🧒 سن الولد *</label>
                             <input type="number" id="childAge" placeholder="السن" min="3" max="18" required>
-                            <div class="error-message" id="ageError">الرجاء إدخال سن صحيح (3-18 سنة)</div>
+                            <div class="error-message" id="ageError">الرجاء إدخال سن صحيح (3-18)</div>
                         </div>
                         <div class="form-group">
                             <label>📚 المرحلة الدراسية *</label>
                             <select id="gradeLevel" required>
                                 <option value="">-- اختر المرحلة --</option>
-                                <option value="KG1">KG 1</option>
-                                <option value="KG2">KG 2</option>
-                                <option value="تمهيدي">تمهيدي</option>
-                                <option value="أولى ابتدائي">أولى ابتدائي</option>
-                                <option value="ثانية ابتدائي">ثانية ابتدائي</option>
-                                <option value="ثالثة ابتدائي">ثالثة ابتدائي</option>
-                                <option value="رابعة ابتدائي">رابعة ابتدائي</option>
-                                <option value="خامسة ابتدائي">خامسة ابتدائي</option>
-                                <option value="سادسة ابتدائي">سادسة ابتدائي</option>
-                                <option value="أولى إعدادي">أولى إعدادي</option>
-                                <option value="ثانية إعدادي">ثانية إعدادي</option>
-                                <option value="ثالثة إعدادي">ثالثة إعدادي</option>
+                                <option>KG 1</option><option>KG 2</option><option>تمهيدي</option>
+                                <option>أولى ابتدائي</option><option>ثانية ابتدائي</option>
+                                <option>ثالثة ابتدائي</option><option>رابعة ابتدائي</option>
+                                <option>خامسة ابتدائي</option><option>سادسة ابتدائي</option>
+                                <option>أولى إعدادي</option><option>ثانية إعدادي</option>
+                                <option>ثالثة إعدادي</option>
                             </select>
-                            <div class="error-message" id="gradeError">الرجاء اختيار المرحلة الدراسية</div>
+                            <div class="error-message" id="gradeError">الرجاء اختيار المرحلة</div>
                         </div>
                         <div class="form-group">
                             <label>💬 الاستفسار (اختياري)</label>
-                            <textarea id="inquiryText" rows="3" placeholder="اكتب استفسارك أو ملاحظاتك هنا..."></textarea>
+                            <textarea id="inquiryText" rows="3" placeholder="اكتب استفسارك هنا..."></textarea>
                         </div>
                         <button type="submit" class="submit-btn" id="submitBtn">
                             <span>إرسال</span>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                         </button>
                     </form>
-                    <div class="success-message" id="successMessage">
-                        ✅ تم إرسال استفسارك بنجاح! سنتواصل معك قريباً.
-                    </div>
+                    <div class="success-message" id="successMessage">✅ تم إرسال استفسارك بنجاح! سنتواصل معك قريباً.</div>
                 </div>
             `;
-            
             document.body.appendChild(overlay);
-            return overlay;
-        }
 
-        // ============ التطبيق الرئيسي ============
-        document.addEventListener('DOMContentLoaded', () => {
-            // إنشاء العناصر الديناميكية
-            const floatingBtn = createFloatingButton();
-            const modal = createModal();
-            
-            const closeModalBtn = document.getElementById('closeModalBtn');
-            const inquiryForm = document.getElementById('inquiryForm');
+            const closeBtn = document.getElementById('closeModalBtn');
+            const form = document.getElementById('inquiryForm');
             const submitBtn = document.getElementById('submitBtn');
-            const successMessage = document.getElementById('successMessage');
-            
-            // فتح المودال
-            floatingBtn.addEventListener('click', () => {
-                modal.classList.remove('hidden');
+            const successMsg = document.getElementById('successMessage');
+
+            btn.addEventListener('click', () => {
+                overlay.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             });
-            
-            // إغلاق المودال
+
             function closeModal() {
-                modal.classList.add('hidden');
+                overlay.classList.add('hidden');
                 document.body.style.overflow = '';
-                if (successMessage.style.display === 'block') {
-                    successMessage.style.display = 'none';
-                    inquiryForm.style.display = 'block';
+                if (successMsg.style.display === 'block') {
+                    successMsg.style.display = 'none';
+                    form.style.display = 'block';
                 }
             }
-            
-            closeModalBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
+
+            closeBtn.addEventListener('click', closeModal);
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeModal();
             });
-            
-            // إغلاق بالمفتاح ESC
+
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                    closeModal();
-                }
+                if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeModal();
             });
-            
-            // التحقق من صحة النموذج والإرسال
-            inquiryForm.addEventListener('submit', async (e) => {
+
+            form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 
-                // إخفاء جميع رسائل الخطأ
                 document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
                 
-                // جمع القيم
                 const parentName = document.getElementById('parentName').value.trim();
                 const phoneNumber = document.getElementById('phoneNumber').value.trim();
                 const childAge = document.getElementById('childAge').value.trim();
@@ -1426,27 +1159,22 @@
                 
                 let hasError = false;
                 
-                // التحقق من الاسم
                 if (!parentName) {
                     document.getElementById('nameError').style.display = 'block';
                     hasError = true;
                 }
                 
-                // التحقق من رقم الهاتف (مصري)
-                const phoneRegex = /^(01[0-2,5]{1}[0-9]{8})$/;
-                if (!phoneRegex.test(phoneNumber)) {
+                if (!/^(01[0-2,5]{1}[0-9]{8})$/.test(phoneNumber)) {
                     document.getElementById('phoneError').style.display = 'block';
                     hasError = true;
                 }
                 
-                // التحقق من السن
                 const age = parseInt(childAge);
                 if (isNaN(age) || age < 3 || age > 18) {
                     document.getElementById('ageError').style.display = 'block';
                     hasError = true;
                 }
                 
-                // التحقق من المرحلة
                 if (!gradeLevel) {
                     document.getElementById('gradeError').style.display = 'block';
                     hasError = true;
@@ -1454,13 +1182,11 @@
                 
                 if (hasError) return;
                 
-                // تعطيل الزر أثناء الإرسال
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<span>⏳ جاري الإرسال...</span>';
                 
                 try {
-                    // حفظ البيانات في Firestore
-                    const docId = await saveInquiry({
+                    await saveInquiry({
                         parentName,
                         phoneNumber,
                         childAge: age,
@@ -1468,91 +1194,35 @@
                         inquiryText: inquiryText || 'لا يوجد استفسار'
                     });
                     
-                    console.log('✅ تم الحفظ بنجاح، رقم الوثيقة:', docId);
+                    form.style.display = 'none';
+                    successMsg.style.display = 'block';
                     
-                    // إظهار رسالة النجاح
-                    inquiryForm.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    
-                    // إعادة تعيين النموذج بعد 3 ثواني وإغلاق
                     setTimeout(() => {
-                        inquiryForm.reset();
-                        inquiryForm.style.display = 'block';
-                        successMessage.style.display = 'none';
+                        form.reset();
+                        form.style.display = 'block';
+                        successMsg.style.display = 'none';
                         closeModal();
                     }, 3000);
                     
                 } catch (error) {
-                    console.error('❌ فشل الإرسال:', error);
-                    let errorMsg = 'حدث خطأ أثناء الإرسال. ';
-                    if (error.code === 'permission-denied') {
-                        errorMsg += 'صلاحيات قاعدة البيانات غير صحيحة. راجع إعدادات Firestore.';
-                    } else if (error.code === 'unavailable') {
-                        errorMsg += 'تعذر الاتصال بالخادم. تحقق من اتصال الإنترنت.';
-                    } else {
-                        errorMsg += 'الرجاء المحاولة مرة أخرى أو الاتصال بنا هاتفياً.';
-                    }
-                    alert(errorMsg);
+                    alert('حدث خطأ. الرجاء المحاولة مرة أخرى أو الاتصال بنا هاتفياً.');
                 } finally {
                     submitBtn.disabled = false;
-                    submitBtn.innerHTML = `
-                        <span>إرسال</span>
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                    `;
+                    submitBtn.innerHTML = '<span>إرسال</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
                 }
             });
-            
-            console.log('🔥 Firestore جاهز | الكوليكشن:', COLLECTION_NAME);
-            console.log('✅ الزر العائم ونموذج الاستفسار جاهزان للعمل');
+
+            console.log('🔥 Firestore جاهز | تتبع الزوار + الاستفسارات');
         });
 
-        // ============ الوظائف الأساسية للموقع ============
+        // ============ تأثيرات الموقع ============
         window.addEventListener('load', function() {
-            // تأثير الهيدر
             const header = document.getElementById('siteHeader');
             window.addEventListener('scroll', function() {
-                if (window.scrollY > 20) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
+                if (window.scrollY > 20) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
             }, { passive: true });
 
-            // تأثيرات الرؤية
-            const revealCards = document.querySelectorAll('.vision-card.reveal');
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.2, rootMargin: '0px 0px -20px 0px' });
-
-            revealCards.forEach((card, i) => {
-                card.style.transitionDelay = (i * 0.06) + 's';
-                observer.observe(card);
-            });
-
-            // معرض الصور
-            const galleryScroll = document.getElementById('galleryScroll');
-            const slides = galleryScroll.querySelectorAll('.gallery-slide');
-            function updateActiveSlide() {
-                const containerRect = galleryScroll.getBoundingClientRect();
-                const containerCenter = containerRect.left + containerRect.width / 2;
-                slides.forEach(slide => {
-                    const rect = slide.getBoundingClientRect();
-                    const slideCenter = rect.left + rect.width / 2;
-                    if (Math.abs(containerCenter - slideCenter) < rect.width / 2) {
-                        slide.classList.add('active');
-                    } else {
-                        slide.classList.remove('active');
-                    }
-                });
-            }
-            galleryScroll.addEventListener('scroll', updateActiveSlide, { passive: true });
-            updateActiveSlide();
-
-            // تنقل سلس
             document.querySelectorAll('a[href^="#"]').forEach(link => {
                 link.addEventListener('click', function(e) {
                     const target = document.querySelector(this.getAttribute('href'));
@@ -1568,9 +1238,6 @@
             console.log('%c🎓 مدرسة الجيل الجديد %c| %c🚀 رؤية 2027',
                 'color:#C77D5A;font-weight:bold;font-size:14px;',
                 '', 'color:#0D1B2A;font-weight:bold;font-size:13px;');
-            console.log('%c💻 برمجة المهندس اسماعيل عماد %c| %c🔥 Firestore',
-                'color:#0D1B2A;font-size:11px;background:#F5EDE3;padding:3px 8px;border-radius:4px;',
-                '', 'color:#FFA000;font-weight:bold;');
         });
     </script>
 </body>
