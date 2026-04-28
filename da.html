@@ -47,7 +47,6 @@
             padding-bottom: 20px;
         }
 
-        /* ============ الهيدر ============ */
         .dashboard-header {
             background: linear-gradient(135deg, #0D1B2A, #1B2D44);
             padding: 10px 12px;
@@ -135,14 +134,12 @@
             to { transform: rotate(360deg); }
         }
 
-        /* ============ المحتوى ============ */
         .dashboard-container {
             max-width: 900px;
             margin: 0 auto;
             padding: 10px 8px;
         }
 
-        /* ============ التبويبات ============ */
         .tab-nav {
             display: flex;
             gap: 4px;
@@ -186,7 +183,6 @@
             display: block;
         }
 
-        /* ============ كروت الإحصائيات ============ */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(95px, 1fr));
@@ -238,7 +234,6 @@
             margin-top: 2px;
         }
 
-        /* ============ ملاحظة ============ */
         .info-box {
             background: #eaf2f8;
             border: 2px solid #3498db;
@@ -251,7 +246,6 @@
             font-weight: 600;
         }
 
-        /* ============ شريط الفلترة ============ */
         .controls-bar {
             background: var(--white);
             border-radius: var(--radius-md);
@@ -309,7 +303,6 @@
             flex-shrink: 0;
         }
 
-        /* ============ كاردات الرسائل ============ */
         .messages-grid {
             display: flex;
             flex-direction: column;
@@ -491,7 +484,6 @@
             background: #fdedec;
         }
 
-        /* ============ جدول الزوار ============ */
         .visitors-table-wrapper {
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
@@ -548,7 +540,6 @@
             color: #1a5276;
         }
 
-        /* ============ حالات التحميل والفارغ ============ */
         .loading-state {
             text-align: center;
             padding: 25px;
@@ -614,7 +605,6 @@
             margin-top: 6px;
         }
 
-        /* ============ مودال التفاصيل ============ */
         .detail-modal-overlay {
             position: fixed;
             top: 0;
@@ -703,7 +693,6 @@
             word-break: break-all;
         }
 
-        /* ============ توست ============ */
         .toast {
             position: fixed;
             bottom: 14px;
@@ -728,7 +717,6 @@
 </head>
 <body>
 
-    <!-- ============ الهيدر ============ -->
     <header class="dashboard-header">
         <div class="header-brand">
             <div class="header-logo">🏫</div>
@@ -746,16 +734,13 @@
         </button>
     </header>
 
-    <!-- ============ المحتوى ============ -->
     <div class="dashboard-container">
-        <!-- التبويبات -->
         <div class="tab-nav">
             <button class="tab-btn active" onclick="switchTab('inquiries')">📝 الاستفسارات</button>
             <button class="tab-btn" onclick="switchTab('visitors')">👁️ الزوار</button>
             <button class="tab-btn" onclick="switchTab('stats')">📊 إحصائيات</button>
         </div>
 
-        <!-- ====== تبويب الاستفسارات ====== -->
         <div class="tab-content active" id="tab-inquiries">
             <div class="stats-grid" id="inquiriesStats">
                 <div class="stat-card inquiries">
@@ -808,7 +793,6 @@
             </div>
         </div>
 
-        <!-- ====== تبويب الزوار ====== -->
         <div class="tab-content" id="tab-visitors">
             <div class="info-box">
                 ✅ كل زيارة للموقع تُسجل مباشرة في Firestore | التحديث كل 30 ثانية تلقائياً
@@ -866,7 +850,6 @@
             </div>
         </div>
 
-        <!-- ====== تبويب الإحصائيات العامة ====== -->
         <div class="tab-content" id="tab-stats">
             <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));">
                 <div class="stat-card inquiries">
@@ -913,10 +896,10 @@
         </div>
     </div>
 
-    <!-- ============ Firebase Firestore ============ -->
     <script type="module">
+        // ✅ تم تحديث الـ import ليشمل getCountFromServer, query, where
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
-        import { getFirestore, collection, query, orderBy, getDocs, updateDoc, doc, deleteDoc, limit } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+        import { getFirestore, collection, getCountFromServer, query, where, orderBy, getDocs, updateDoc, doc, deleteDoc, limit } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBPgtF_GqT95QkMwwoJMGiZWFPjHFdA_N0",
@@ -939,7 +922,6 @@
         let filteredInquiries = [];
         let allVisitors = [];
 
-        // ============ تبديل التبويبات ============
         window.switchTab = function(tabName) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -950,7 +932,6 @@
             if (tabName === 'stats') updateStatsTab();
         };
 
-        // ============ تحميل كل البيانات ============
         window.loadAllData = async function() {
             const refreshBtn = document.getElementById('refreshBtn');
             refreshBtn.classList.add('spinning');
@@ -960,10 +941,9 @@
             refreshBtn.classList.remove('spinning');
             
             const now = new Date();
-            console.log(`🕐 آخر تحديث: ${now.toLocaleTimeString('ar-EG')} | استفسارات: ${allInquiries.length} | زوار: ${allVisitors.length}`);
+            console.log(`🕐 آخر تحديث: ${now.toLocaleTimeString('ar-EG')} | استفسارات: ${allInquiries.length}`);
         };
 
-        // ============ تحميل الاستفسارات ============
         async function loadInquiries() {
             try {
                 const q = query(collection(db, INQUIRIES_COLLECTION), orderBy('createdAt', 'desc'), limit(200));
@@ -994,34 +974,76 @@
             }
         }
 
-        // ============ تحميل الزوار ============
+        // ==================== ✅ تم تعديل دالة loadVisitors بالكامل ✅ ====================
         async function loadVisitors() {
             try {
-                const q = query(collection(db, VISITORS_COLLECTION), orderBy('timestamp', 'desc'), limit(100));
-                const snapshot = await getDocs(q);
+                const visitorsColl = collection(db, VISITORS_COLLECTION);
+                const now = new Date();
                 
-                allVisitors = [];
-                snapshot.forEach((doc) => {
-                    const data = doc.data();
-                    allVisitors.push({
-                        id: doc.id,
-                        ...data,
-                        timestamp: data.timestamp?.toDate?.() || new Date()
-                    });
-                });
+                // 1. حساب بدايات الفترات الزمنية
+                const todayStr = now.toISOString().split('T')[0]; // اليوم
+                const monthStr = now.toISOString().substring(0, 7); // الشهر
                 
-                updateVisitorsStats();
+                // 2. تجهيز الاستعلامات (Queries)
+                const qTotal = query(visitorsColl);
+                const qToday = query(visitorsColl, where("visitDate", "==", todayStr));
+                const qMonth = query(visitorsColl, where("visitMonth", "==", monthStr));
+
+                // 3. جلب الأعداد من السيرفر مباشرة (كل طلب = قراءة واحدة فقط مهما كان عدد الزوار)
+                const [snapTotal, snapToday, snapMonth] = await Promise.all([
+                    getCountFromServer(qTotal),
+                    getCountFromServer(qToday),
+                    getCountFromServer(qMonth)
+                ]);
+
+                const total = snapTotal.data().count;
+                const today = snapToday.data().count;
+                const month = snapMonth.data().count;
+
+                // 4. تحديث الشاشة بالأرقام الحقيقية
+                document.getElementById('totalVisitors').textContent = total;
+                document.getElementById('todayVisitors').textContent = today;
+                document.getElementById('monthVisitors').textContent = month;
+                
+                // حساب عدد زوار الأسبوع (طريقة تقريبية سريعة تعتمد على التخزين المحلي أو الرينج)
+                // ولكن لعمل احصاء دقيق للأسبوع نحتاج تاريخ البداية، سنحتفظ بالطريقة القديمة للجدول فقط.
+                // مؤقتاً سنقوم بحسابه من الـ allVisitors إذا كان متاحاً أو نتركه صفر
+                let weekCount = 0;
+                if(allVisitors.length > 0) {
+                    const weekStr = getWeekNumber(now);
+                    weekCount = allVisitors.filter(v => v.visitWeek === weekStr).length;
+                }
+                document.getElementById('weekVisitors').textContent = weekCount;
+
+                // تحديث تبويب الإحصائيات العامة أيضاً
+                document.getElementById('statTotalVisitors').textContent = total;
+                document.getElementById('statTodayVisitors').textContent = today;
+                document.getElementById('statMonthVisitors').textContent = month;
+                document.getElementById('statWeekVisitors').textContent = weekCount;
+
+                // إحصائيات الجهاز (موبايل / كمبيوتر) لا تزال تعتمد على البيانات المحملة
+                const mobileCount = allVisitors.filter(v => v.deviceType === 'mobile').length;
+                const desktopCount = allVisitors.filter(v => v.deviceType === 'desktop').length;
+                document.getElementById('mobileVisitors').textContent = mobileCount;
+                document.getElementById('desktopVisitors').textContent = desktopCount;
+                document.getElementById('statMobileVisitors').textContent = mobileCount;
+                document.getElementById('statDesktopVisitors').textContent = desktopCount;
+
+                console.log(`✅ تم جلب الأعداد الحقيقية: إجمالي (${total}) - اليوم (${today}) - الشهر (${month})`);
+                
+                // جلب آخر 10 سجلات فقط للعرض في الجدول (توفيراً للبيانات)
+                const qLatest = query(visitorsColl, orderBy('timestamp', 'desc'), limit(50));
+                const latestSnap = await getDocs(qLatest);
+                allVisitors = latestSnap.docs.map(doc => ({ id: doc.id, ...doc.data(), timestamp: doc.data().timestamp?.toDate() }));
                 renderVisitorsTable();
-                console.log(`✅ تم تحميل ${allVisitors.length} زيارة`);
+
             } catch (error) {
-                console.error('❌ فشل تحميل الزوار:', error);
-                document.getElementById('visitorsTableBody').innerHTML = `
-                    <tr><td colspan="6" style="color:#e74c3c;padding:15px;">❌ فشل تحميل بيانات الزوار: ${error.message}</td></tr>
-                `;
+                console.error('❌ خطأ في جلب الأعداد:', error);
+                document.getElementById('visitorsTableBody').innerHTML = `<tr><td colspan="6" style="color:#e74c3c;padding:15px;">❌ فشل تحميل بيانات الزوار: ${error.message}</td></tr>`;
             }
         }
+        // =====================================================================
 
-        // ============ إحصائيات الاستفسارات ============
         function updateInquiriesStats() {
             const now = new Date();
             const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -1034,40 +1056,10 @@
             document.getElementById('statPendingInquiries').textContent = allInquiries.filter(m => !m.isRead).length;
         }
 
-        // ============ إحصائيات الزوار ============
-        function updateVisitorsStats() {
-            const now = new Date();
-            const todayStr = now.toISOString().split('T')[0];
-            const monthStr = now.toISOString().substring(0, 7);
-            const weekStr = getWeekNumber(now);
-            
-            const todayVisitors = allVisitors.filter(v => v.visitDate === todayStr);
-            const weekVisitors = allVisitors.filter(v => v.visitWeek === weekStr);
-            const monthVisitors = allVisitors.filter(v => v.visitMonth === monthStr);
-            const mobileVisitors = allVisitors.filter(v => v.deviceType === 'mobile');
-            const desktopVisitors = allVisitors.filter(v => v.deviceType === 'desktop');
-            
-            document.getElementById('totalVisitors').textContent = allVisitors.length;
-            document.getElementById('todayVisitors').textContent = todayVisitors.length;
-            document.getElementById('weekVisitors').textContent = weekVisitors.length;
-            document.getElementById('monthVisitors').textContent = monthVisitors.length;
-            document.getElementById('mobileVisitors').textContent = mobileVisitors.length;
-            document.getElementById('desktopVisitors').textContent = desktopVisitors.length;
-            
-            document.getElementById('statTotalVisitors').textContent = allVisitors.length;
-            document.getElementById('statTodayVisitors').textContent = todayVisitors.length;
-            document.getElementById('statWeekVisitors').textContent = weekVisitors.length;
-            document.getElementById('statMonthVisitors').textContent = monthVisitors.length;
-            document.getElementById('statMobileVisitors').textContent = mobileVisitors.length;
-            document.getElementById('statDesktopVisitors').textContent = desktopVisitors.length;
-        }
-
         function updateStatsTab() {
             updateInquiriesStats();
-            updateVisitorsStats();
         }
 
-        // ============ فلترة الاستفسارات ============
         window.filterInquiries = function() {
             const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
             const statusFilter = document.getElementById('filterStatus').value;
@@ -1091,7 +1083,6 @@
             renderInquiries();
         };
 
-        // ============ عرض الاستفسارات ============
         function renderInquiries() {
             const grid = document.getElementById('messagesGrid');
             
@@ -1143,7 +1134,6 @@
             }).join('');
         }
 
-        // ============ عرض جدول الزوار ============
         function renderVisitorsTable() {
             const tbody = document.getElementById('visitorsTableBody');
             
@@ -1152,7 +1142,7 @@
                     <span class="empty-icon" style="font-size:30px;">👁️</span><br>
                     لا توجد زيارات مسجلة بعد<br>
                     <span style="font-size:8px;">افتح الصفحة الرئيسية للمدرسة وستظهر الزيارة هنا</span>
-                </td></tr>`;
+                 </td></tr>`;
                 return;
             }
             
@@ -1173,7 +1163,6 @@
             }).join('');
         }
 
-        // ============ عرض تفاصيل الاستفسار ============
         window.showDetail = function(id) {
             const msg = allInquiries.find(m => m.id === id);
             if (!msg) return;
@@ -1208,7 +1197,6 @@
             if (!msg.isRead) markAsRead(id, true);
         };
 
-        // ============ تعليم كمقروء ============
         window.markAsRead = async function(id, silent = false) {
             try {
                 const docRef = doc(db, INQUIRIES_COLLECTION, id);
@@ -1227,7 +1215,6 @@
             }
         };
 
-        // ============ حذف استفسار ============
         window.deleteInquiry = async function(id) {
             if (!confirm('⚠️ حذف هذا الاستفسار؟')) return;
             
@@ -1245,7 +1232,6 @@
             }
         };
 
-        // ============ دوال مساعدة ============
         function formatTime(date) {
             if (!date) return '-';
             const now = new Date();
@@ -1287,15 +1273,10 @@
             setTimeout(() => toast.remove(), 2500);
         }
 
-        // ============ بدء التشغيل ============
         document.addEventListener('DOMContentLoaded', () => {
             loadAllData();
-            
-            // تحديث تلقائي كل 30 ثانية
             setInterval(loadAllData, 30000);
-            
-            console.log('🔥 لوحة تحكم متكاملة | استفسارات + زوار | Firestore مباشر');
-            console.log('📊 الكوليكشنز:', INQUIRIES_COLLECTION, '+', VISITORS_COLLECTION);
+            console.log('🔥 لوحة تحكم متكاملة | إحصائيات دقيقة باستخدام getCountFromServer');
         });
     </script>
 </body>
