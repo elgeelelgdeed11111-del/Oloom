@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>أتوبيس كومبليت | تسلية الاجازة |  
+</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #6C5CE7;
+            --secondary: #00CEC9;
+            --accent: #FDCB6E;
+            --dark: #2D3436;
+            --light: #F8F9FA;
+            --success: #00B894;
+            --danger: #E17055;
+            --warning: #FDCB6E;
+            --info: #74B9FF;
+        }
+        * { font-family: 'Cairo', sans-serif; }
+        
+        /* منع التمرير الأفقي نهائياً */
+        html, body {
+            overflow-x: hidden !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            position: relative;
+        }
+        
+        body { 
+            background: linear-gradient(135deg, #6C5CE7 0%, #00CEC9 50%, #FDCB6E 100%);
+            min-height: 100vh;
+            min-height: 100dvh;
+            position: relative;
+            overflow-x: hidden !important;
+            width: 100%;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* منع التمرير الأفقي لأي عنصر */
+        .max-w-lg, .game-card, .container, [class*="max-w"] {
+            overflow-x: hidden !important;
+        }
+        
+        body.game-active {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden !important;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/></svg>');
+            background-size: 100px 100px;
+            animation: bgFloat 60s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        @keyframes bgFloat {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100%) rotate(360deg); }
+        }
+        .game-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            overflow-x: hidden !important;
+        }
+        .letter-display {
+            background: linear-gradient(135deg, #6C5CE7, #00CEC9);
+            box-shadow: 0 20px 30px -10px rgba(108, 92, 231, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .letter-roulette {
+            animation: rouletteSpin 0.3s ease-in-out;
+        }
+        @keyframes rouletteSpin {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            25% { transform: scale(1.3) rotate(90deg); opacity: 0.7; }
+            50% { transform: scale(1.5) rotate(180deg); opacity: 0.5; }
+            75% { transform: scale(1.3) rotate(270deg); opacity: 0.7; }
+            100% { transform: scale(1) rotate(360deg); opacity: 1; }
+        }
+        .input-fields input {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #E5E7EB;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            padding: 12px;
+        }
+        .input-fields input:focus {
+            border-color: #6C5CE7;
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+            outline: none;
+            background: white;
+        }
+        .btn-primary {
+            background: linear-gradient(105deg, #6C5CE7, #00CEC9);
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(108, 92, 231, 0.4); }
+        .btn-primary:active { transform: scale(0.97); }
+        .btn-primary:disabled { opacity: 0.5; transform: none; cursor: not-allowed; }
+        .leaderboard-item {
+            background: linear-gradient(to left, rgba(108, 92, 231, 0.05), rgba(0, 206, 201, 0.05));
+            border-radius: 16px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(108, 92, 231, 0.1);
+        }
+        .leaderboard-item:hover {
+            background: linear-gradient(to left, rgba(108, 92, 231, 0.15), rgba(0, 206, 201, 0.15));
+            transform: translateX(-5px);
+        }
+        [x-cloak] { display: none !important; }
+        .loading-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .toast {
+            position: fixed; bottom: 30px; left: 50%;
+            transform: translateX(-50%);
+            background: rgba(45, 52, 54, 0.95);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            z-index: 200;
+            animation: fadeUp 3s forwards;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateX(-50%) translateY(30px); }
+            15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            85% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-30px); visibility: hidden; }
+        }
+        .input-pending { background-color: rgba(253, 203, 110, 0.2) !important; border-color: #FDCB6E !important; }
+        .input-correct { 
+            background-color: rgba(0, 184, 148, 0.2) !important; 
+            border-color: #00B894 !important;
+            animation: correctPulse 0.5s ease;
+        }
+        .input-wrong { 
+            background-color: rgba(225, 112, 85, 0.15) !important; 
+            border-color: #E17055 !important;
+            animation: shakeEffect 0.4s ease;
+        }
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes shakeEffect {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .real-time-badge {
+            background: linear-gradient(135deg, #00B894, #00CEC9);
+            color: white;
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+        @keyframes badgePulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+        .category-label {
+            background: linear-gradient(135deg, #6C5CE7, #00CEC9);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+        .channels-popup-content {
+            font-size: 13px;
+        }
+        .channels-popup-content .channel-item {
+            font-size: 12px;
+            padding: 10px;
+        }
+        .channels-popup-content .small-text {
+            font-size: 11px;
+        }
+        /* إخفاء حقول الإدخال أثناء الروليت */
+        .input-fields-hidden {
+            opacity: 0;
+            visibility: hidden;
+            height: 0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .input-fields-visible {
+            opacity: 1;
+            visibility: visible;
+            transition: all 0.5s ease;
+        }
+        .roulette-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            z-index: 150;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .roulette-letter {
+            font-size: 120px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6C5CE7, #00CEC9, #FDCB6E);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: letterPop 0.15s ease-in-out infinite;
+        }
+        @keyframes letterPop {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="p-4" x-cloak x-data="gameApp()">
+    
+    <!-- شاشة التحميل -->
+    <div x-show="loading" class="loading-overlay">
+        <div class="bg-white p-6 rounded-2xl text-center shadow-2xl">
+            <i class="fas fa-bus fa-3x mb-3" style="color: var(--primary)"></i>
+            <p class="mt-3 text-lg font-bold">جاري تحميل أتوبيس كومبليت...</p>
+            <p class="text-sm text-gray-600 mt-1">يرجى الانتظار</p>
+        </div>
+    </div>
+
+    <!-- روليت الحروف -->
+    <div x-show="showRoulette" class="roulette-overlay" x-cloak>
+        <div class="text-center">
+            <div class="roulette-letter" x-text="rouletteLetter" style="font-size: 120px;"></div>
+            <p class="text-white text-xl mt-4 font-bold">🎲 جاري اختيار الحرف...</p>
+            <p class="text-white/70 text-sm mt-2">استعد للتحدي!</p>
+        </div>
+    </div>
+
+    <!-- رسالة التنبيه -->
+    <div x-show="toastMessage" x-text="toastMessage" class="toast"></div>
+
+    <!-- الهيدر -->
+    <div class="max-w-lg mx-auto mb-4 flex justify-between items-center bg-white/90 backdrop-blur-md p-3 rounded-full shadow-md" style="z-index: 10; position: relative;">
+        <div>
+            <i class="fas fa-bus text-xl" style="color: var(--primary)"></i>
+            <span class="font-bold text-sm">  | أ. إسماعيل عماد</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <span class="real-time-badge"><i class="fas fa-sync-alt fa-fw fa-spin"></i> متابعة فورية</span>
+            <a href="tel:01122104596" class="text-sm font-bold" style="color: var(--primary)">
+                <i class="fas fa-phone-alt ml-1"></i> 01122104596
+            </a>
+        </div>
+    </div>
+
+    <!-- شاشة البداية -->
+    <div class="max-w-lg mx-auto" x-show="!gameStarted && !showChannelsPopup">
+        <div class="game-card p-8 text-center mt-8">
+            <i class="fas fa-bus text-6xl mb-4" style="color: var(--accent)"></i>
+            <h2 class="text-3xl font-black" style="color: var(--dark)">🚌 أتوبيس كومبليت</h2>
+            <p class="text-gray-600 text-base mt-3">اختبر معلوماتك مع أصدقائك في تحدي الحروف الكامل</p>
+            <div class="text-sm text-gray-500 mt-2" x-show="hasReturningPlayer">
+                <i class="fas fa-user-check text-green-500"></i> 
+                مرحباً بعودتك! سيتم استعادة نقاطك السابقة
+            </div>
+            <input type="text" x-model="playerName" maxlength="30"
+                   @input="playerName = playerName.replace(/[^\u0621-\u064A\s]/g, '')"
+                   class="w-full mt-6 p-4 rounded-xl border-2 text-center text-lg font-bold"
+                   placeholder="أدخل اسمك (3 أحرف فأكثر)"
+                   style="border-color: var(--primary)">
+            <button @click="startNewGame" :disabled="!playerName || playerName.length<3"
+                    class="mt-6 w-full btn-primary text-white font-bold py-4 rounded-xl shadow-lg disabled:opacity-50 text-lg">
+                🚀 ابدأ التحدي
+            </button>
+            <div class="mt-4 text-sm text-gray-500">
+ </div>
+        </div>
+    </div>
+
+    <!-- شاشة اللعبة -->
+    <div class="max-w-lg mx-auto" x-show="gameStarted && !showChannelsPopup">
+        <div class="game-card p-6">
+            <div class="text-center mb-6">
+                <div class="letter-display w-32 h-32 mx-auto rounded-full flex items-center justify-center">
+                    <span class="text-8xl font-black text-white" x-text="currentLetter"></span>
+                </div>
+                <div class="mt-4 flex justify-center gap-3 text-sm flex-wrap">
+                    <span class="px-4 py-2 rounded-full font-bold" style="background: rgba(253,203,110,0.3);">
+                        <i class="far fa-clock"></i> <span x-text="timer"></span> ث
+                    </span>
+                    <span class="px-4 py-2 rounded-full font-bold" style="background: rgba(0,184,148,0.3);">
+                        <i class="fas fa-star"></i> نقاطي: <span x-text="myScore"></span>
+                    </span>
+                    <span x-show="!firestoreReady" class="px-4 py-2 rounded-full font-bold bg-gray-300">
+                        📴 غير متصل
+                    </span>
+                    <span x-show="firestoreReady && realtimeConnected" class="px-4 py-2 rounded-full font-bold" style="background: rgba(0,206,201,0.3);">
+                        <i class="fas fa-link"></i> مباشر
+                    </span>
+                </div>
+                <div class="mt-2 text-base font-bold" x-show="lastRoundScore > 0" style="color: var(--success)">
+                    ✅ إجابات صحيحة في الجولة السابقة: <span x-text="lastRoundScore"></span>
+                </div>
+                <div class="mt-2 text-sm text-gray-600" x-show="lastRoundScore === 6">
+                    🎉 رائع! إجابة كاملة! 🎉
+                </div>
+            </div>
+
+            <div class="input-fields space-y-3" :class="showInputFields ? 'input-fields-visible' : 'input-fields-hidden'">
+                <div>
+                    <span class="category-label">👦 اسم ولد</span>
+                    <input type="text" x-model="answers.boys" maxlength="25" enterkeyhint="next"
+                           @input.debounce.250ms="checkAnswerRealTime('boys', $event.target.value)"
+                           class="w-full p-3 rounded-xl"
+                           :class="{'input-pending': answerStatus.boys === 'pending', 'input-correct': answerStatus.boys === true, 'input-wrong': answerStatus.boys === false}">
+                </div>
+                <div>
+                    <span class="category-label">👧 اسم بنت</span>
+                    <input type="text" x-model="answers.girls" maxlength="25" enterkeyhint="next"
+                           @input.debounce.250ms="checkAnswerRealTime('girls', $event.target.value)"
+                           class="w-full p-3 rounded-xl"
+                           :class="{'input-pending': answerStatus.girls === 'pending', 'input-correct': answerStatus.girls === true, 'input-wrong': answerStatus.girls === false}">
+                </div>
+                <div>
+                    <span class="category-label">📦 جماد</span>
+                    <input type="text" x-model="answers.object" maxlength="25" enterkeyhint="next"
+                           @input.debounce.250ms="checkAnswerRealTime('object', $event.target.value)"
+                           class="w-full p-3 rounded-xl"
+                           :class="{'input-pending': answerStatus.object === 'pending', 'input-correct': answerStatus.object === true, 'input-wrong': answerStatus.object === false}">
+                </div>
+                <div>
+                    <span class="category-label">🌿 نبات</span>
+                    <input type="text" x-model="answers.plant" maxlength="25" enterkeyhint="next"
+                           @input.debounce.250ms="checkAnswerRealTime('plant', $event.target.value)"
+                           class="w-full p-3 rounded-xl"
+                           :class="{'input-pending': answerStatus.plant === 'pending', 'input-correct': answerStatus.plant === true, 'input-wrong': answerStatus.plant === false}">
+                </div>
+                <div>
+                    <span class="category-label">🐾 حيوان</span>
+                    <input type="text" x-model="answers.animal" maxlength="25" enterkeyhint="next"
+                           @input.debounce.250ms="checkAnswerRealTime('animal', $event.target.value)"
+                           class="w-full p-3 rounded-xl"
+                           :class="{'input-pending': answerStatus.animal === 'pending', 'input-correct': answerStatus.animal === true, 'input-wrong': answerStatus.animal === false}">
+                </div>
+                <div>
+                    <span class="category-label">🌍 بلد</span>
+                    <input type="text" x-model="answers.country" maxlength="30" enterkeyhint="done"
+                           @input.debounce.250ms="checkAnswerRealTime('country', $event.target.value)"
+                           class="w-full p-3 rounded-xl"
+                           :class="{'input-pending': answerStatus.country === 'pending', 'input-correct': answerStatus.country === true, 'input-wrong': answerStatus.country === false}">
+                </div>
+            </div>
+
+            <button @click="submitRound" :disabled="submitting || !showInputFields"
+                    class="mt-6 w-full btn-primary text-white font-bold py-4 rounded-xl text-lg">
+                <span x-show="!submitting">✏️ إرسال الجولة</span>
+                <span x-show="submitting"><i class="fas fa-spinner fa-spin"></i> جاري الإرسال...</span>
+            </button>
+            <button @click="testOnlyRound" :disabled="!showInputFields"
+                    class="mt-3 w-full bg-gray-400 hover:bg-gray-500 text-white font-bold py-3 rounded-xl text-sm transition">
+                🔍 تحقق من إجاباتي فقط
+            </button>
+        </div>
+
+        <!-- لوحة المتصدرين -->
+        <div class="mt-6 game-card p-5">
+            <h3 class="font-black text-center text-xl" style="color: var(--primary)">
+                <i class="fas fa-trophy"></i> أفضل 10 لاعبين
+                <span class="text-sm" style="color: var(--success)">
+                    <i class="fas fa-bolt"></i> لحظي
+                </span>
+            </h3>
+            <div class="space-y-2 mt-3 max-h-60 overflow-y-auto">
+                <template x-for="(user, idx) in topPlayers" :key="idx">
+                    <div class="leaderboard-item flex justify-between text-base items-center">
+                        <span class="font-bold flex items-center gap-1">
+                            <span x-show="idx === 0" class="ml-1 text-lg">🥇</span>
+                            <span x-show="idx === 1" class="ml-1 text-lg">🥈</span>
+                            <span x-show="idx === 2" class="ml-1 text-lg">🥉</span>
+                            <span x-show="idx > 2" x-text="idx+1" class="ml-2 text-gray-500 text-sm"></span>
+                            
+                            <span x-text="user.name" :class="idx < 3 ? 'text-purple-900 font-black' : 'text-gray-700'"></span>
+                        </span>
+                        <span class="px-3 py-1 rounded-full font-bold" style="background: rgba(108,92,231,0.2);">
+                            <i class="fas fa-star" style="color: var(--accent)"></i>
+                            <span x-text="user.score"></span>
+                        </span>
+                    </div>
+                </template>
+                <div x-show="topPlayers.length === 0 && firestoreReady" class="text-center text-gray-500 py-4">
+                    <i class="fas fa-spinner fa-spin"></i> جاري تحميل المتصدرين...
+                </div>
+            </div>
+            <div class="text-sm text-center mt-3 font-bold" x-show="myRank" style="color: var(--primary)">
+                📍 ترتيبي الحالي: <span x-text="myRank"></span> | نقاطي: <span x-text="myScore"></span>
+            </div>
+            <div class="text-xs text-center text-gray-500 mt-2">
+                📡 يتم تحديث الترتيب تلقائياً عند تغير النقاط
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة القنوات - تظهر بعد كل جولة، ولن تختفي نهائياً إلا بالاشتراك في جروب -->
+    <div x-show="showChannelsPopup" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-4" x-cloak>
+        <div class="game-card p-5 max-w-md w-full text-center channels-popup-content" style="max-height: 90vh; overflow-y: auto;">
+            <div class="flex justify-center mb-2">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-white text-3xl"></i>
+                </div>
+            </div>
+            
+            <h3 class="font-black text-xl" style="color: var(--dark)">
+                أهلاً بك يا <span x-text="playerName" class="text-purple-600"></span>! 👋
+            </h3>
+            
+            <div class="mt-2 p-3 bg-gradient-to-r from-purple-50 to-cyan-50 rounded-xl">
+                <p class="text-sm font-bold" style="color: var(--primary)">
+                    🎮 اللعبة مبرمجة من المهندس <span class="text-purple-700">إسماعيل عماد</span>
+                </p>
+                <p class="text-xs text-gray-600 mt-1">
+                    مهندس برمجيات ومتخصص في الفيزياء والكيمياء والعلوم
+                </p>
+            </div>
+            
+            <p class="text-sm mt-3 text-gray-700">
+                ⭐ لو انت أو حد من اخواتك أو قرايبك محتاج الجروبات والقنوات دي، ادخل فيها عشان ورانا شغل كتير! ⭐
+            </p>
+            
+            <p class="text-xs font-bold mt-2" style="color: var(--success)">
+                🎁 +10 نقاط لكل قناة أو جروب تنضم إليها!
+            </p>
+            
+            <div class="space-y-2 mt-3">
+                <a href="https://whatsapp.com/channel/0029Vb7JFnI3mFY4QDCKNc2v" target="_blank"
+                   @click="addChannelPoints('physics')"
+                   class="channel-item flex justify-between p-3 border-2 rounded-xl hover:bg-green-50 transition items-center">
+                    <span class="flex items-center"><i class="fab fa-whatsapp text-green-600 ml-2 text-lg"></i> <span class="font-semibold">📡 قناة الفيزياء والكيمياء</span></span>
+                    <span class="text-xs px-2 py-1 rounded-full" style="background: var(--success); color: white;">+10</span>
+                </a>
+                
+                <a href="https://whatsapp.com/channel/0029Vb7ZrnVKrWQuVcc3fB07" target="_blank"
+                   @click="addChannelPoints('coding')"
+                   class="channel-item flex justify-between p-3 border-2 rounded-xl hover:bg-green-50 transition items-center">
+                    <span class="flex items-center"><i class="fab fa-whatsapp text-green-600 ml-2 text-lg"></i> <span class="font-semibold">💻 برمجة - الصف الثاني الثانوي</span></span>
+                    <span class="text-xs px-2 py-1 rounded-full" style="background: var(--success); color: white;">+10</span>
+                </a>
+                
+                <a href="https://whatsapp.com/channel/0029Vb7MJA97tkj6m1DOHA2S" target="_blank"
+                   @click="addChannelPoints('grade10')"
+                   class="channel-item flex justify-between p-3 border-2 rounded-xl hover:bg-green-50 transition items-center">
+                    <span class="flex items-center"><i class="fab fa-whatsapp text-green-600 ml-2 text-lg"></i> <span class="font-semibold">📚 أولى ثانوي بكالوريا 2027</span></span>
+                    <span class="text-xs px-2 py-1 rounded-full" style="background: var(--success); color: white;">+10</span>
+                </a>
+                
+                <a href="https://chat.whatsapp.com/Hr0jxyBiaivBWSPrvBdNNV" target="_blank"
+                   @click="addChannelPoints('grade7')"
+                   class="channel-item flex justify-between p-3 border-2 rounded-xl hover:bg-green-50 transition items-center">
+                    <span class="flex items-center"><i class="fab fa-whatsapp text-green-600 ml-2 text-lg"></i> <span class="font-semibold">👨‍🎓 أولى إعدادي - دفعة 2026</span></span>
+                    <span class="text-xs px-2 py-1 rounded-full" style="background: var(--success); color: white;">+10</span>
+                </a>
+                
+                <a href="https://chat.whatsapp.com/Lm8bZAnRo0f305tBHGpOs2" target="_blank"
+                   @click="addChannelPoints('grade8')"
+                   class="channel-item flex justify-between p-3 border-2 rounded-xl hover:bg-green-50 transition items-center">
+                    <span class="flex items-center"><i class="fab fa-whatsapp text-green-600 ml-2 text-lg"></i> <span class="font-semibold">📖 تانية إعدادي - دفعة 2026</span></span>
+                    <span class="text-xs px-2 py-1 rounded-full" style="background: var(--success); color: white;">+10</span>
+                </a>
+                
+                <a href="https://chat.whatsapp.com/E4ysGR35s8oDWxrdSJPuZm" target="_blank"
+                   @click="addChannelPoints('grade9')"
+                   class="channel-item flex justify-between p-3 border-2 rounded-xl hover:bg-green-50 transition items-center">
+                    <span class="flex items-center"><i class="fab fa-whatsapp text-green-600 ml-2 text-lg"></i> <span class="font-semibold">🎯 تالتة إعدادي - دفعة 2026</span></span>
+                    <span class="text-xs px-2 py-1 rounded-full" style="background: var(--success); color: white;">+10</span>
+                </a>
+            </div>
+            
+            <div class="mt-3 text-center small-text text-gray-500 bg-gray-50 p-2 rounded-lg">
+                <i class="fas fa-info-circle"></i> ⚠️ لن تختفي هذه النافذة إلا بعد الاشتراك في أحد القنوات أو الجروبات
+            </div>
+            
+            <button @click="closeChannelsPopup" class="mt-4 text-gray-500 hover:text-gray-700 underline transition text-sm">
+                ✖️ إغلاق النافذة 
+
+            </button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
+        import { 
+            getFirestore, doc, setDoc, getDoc, collection, query, 
+            orderBy, limit, onSnapshot, where, getCountFromServer,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+
+        const FIREBASE_CONFIG = {
+            apiKey: "AIzaSyBPgtF_GqT95QkMwwoJMGiZWFPjHFdA_N0",
+            authDomain: "manassa-oloom.firebaseapp.com",
+            databaseURL: "https://manassa-oloom-default-rtdb.firebaseio.com",
+            projectId: "manassa-oloom",
+            storageBucket: "manassa-oloom.firebasestorage.app",
+            messagingSenderId: "475047988456",
+            appId: "1:475047988456:web:ab25a9b01b5c77483b0d5d",
+            measurementId: "G-F0N011WQB9"
+        };
+
+        const LETTERS = ['ا','ب','ج','د','ر','س','ع','ف','ق','ك','ل','م','ن','ه','و','ي'];
+        
+        function normalize(str) {
+            if (!str || str.trim() === '') return '';
+            let normalized = str.trim().toLowerCase();
+            if (normalized.startsWith('ال') && normalized.length > 3) normalized = normalized.substring(2);
+            normalized = normalized.replace(/[إأآا]/g, 'ا');
+            normalized = normalized.replace(/ة/g, 'ه');
+            normalized = normalized.replace(/ى/g, 'ي');
+            normalized = normalized.replace(/[\u064B-\u065F\u0670]/g, '');
+            normalized = normalized.replace(/\s+/g, ' ');
+            return normalized.trim();
+        }
+
+        const RAW_KNOWLEDGE = {
+            'ا': { boys:['أحمد','أمير','أيمن','أسامة','أشرف','أمجد','أكرم','أديب'], girls:['أمل','أسماء','آية','أماني','أمينة','أثير','أريج','أبرار'], object:['أريكة','أبريق','أرجوحة','أطباق','أثاث','أقلام','أسطوانة'], plant:['أرز','أقحوان','أراك','أبنوس','آس','أثل'], animal:['أرنب','أسد','أفعى','أخطبوط','أطوم'], country:['ألمانيا','الأردن','أرمينيا','أستراليا','أفغانستان','ألبانيا','أندونيسيا'] },
+            'ب': { boys:['بدر','باسل','بكر','بسام','بشير','بلال','بندر','بهاء'], girls:['بثينة','بشرى','بسمة','بشائر','بلقيس','بنان','بهية','بيان'], object:['باب','بكرة','براد','بساط','بوصلة','بطانية','برواز'], plant:['بصل','باميا','بطاطس','بلح','برتقال','باذنجان','بقدونس'], animal:['بط','بغل','بقر','بومة','ببر','بجع','بزون'], country:['بريطانيا','بلجيكا','باكستان','بنما','بيرو','بنين','بلغاريا'] },
+            'ج': { boys:['جابر','جاسم','جمال','جواد','جلال','جميل','جعفر','جهاد'], girls:['جمانة','جواهر','جورية','جلنار','جود','جيهان','جنى','جليلة'], object:['جرس','جدار','جرار','جسر','جوال','جراب','جاكيت'], plant:['جزر','جلنار','جوجوبا','جوري','جرجير','جوز','جنجن'], animal:['جمل','جدي','جراد','جربوع','جرو','جلم','جشنة'], country:['الجزائر','جيبوتي','جورجيا','جامايكا','جرينادا'] },
+            'د': { boys:['داود','دانيال','دريد','درويش','دخيل','دياب','دهام'], girls:['داليا','دنيا','ديمة','دلال','دعاء','دانية','دولت'], object:['دفتر','دبوس','درج','دولاب','دراجة','دش','دورية'], plant:['دوم','دبق','دحنون','دراق','دردار','دلب','دوما'], animal:['دب','دجاجة','دلفين','ديك','دودة','دلق','دبور'], country:['دنمارك','دومينيكا','دومينيكان'] },
+            'ر': { boys:['رامي','رائد','راضي','رافت','رجب','رشيد','رفعت','رمضان'], girls:['رنا','رهام','رباب','رغد','رؤى','رزان','رنيم','ريتا'], object:['راديو','رف','رسالة','راية','رمانة','رصيف','ريموت'], plant:['رجلة','رمان','ريحان','رند','رز','رغل','رازقي'], animal:['رنة','رخمة','رباح','رعاد','رميع','ربيع','رهاوي'], country:['روسيا','رومانيا','رواندا'] },
+            'س': { boys:['سامر','سعيد','سلمان','سالم','سليم','سيف','ساهر','سامح'], girls:['سارة','سعاد','سلمى','سهام','سمر','سحر','سجى','سلوى'], object:['ساعة','سرير','سماعة','سلم','سيارة','سجادة','ساطور'], plant:['سدر','سفرجل','سوسن','سرو','سنط','سحلب','سلمك'], animal:['سمكة','سلحفاة','سنجاب','سحلية','سعدان','سرعوم','سقنقور'], country:['سوريا','السعودية','سنغافورة','السودان','سويسرا','السويد','سلوفاكيا'] },
+            'ع': { boys:['علي','عمر','عمار','عادل','عاصم','عبدالله','عزيز','عرفات'], girls:['عائشة','عزة','عبير','عطرة','علا','عذراء','علياء','عصمت'], object:['عربة','عبوة','عصا','عطر','عجلة','عدسة','عتلة'], plant:['عنب','عسل','عرار','عود','علندى','عرفج','عباد'], animal:['عقاب','عنكبوت','عقرب','عجل','عندليب','عوسرج','عرس'], country:['عمان','العراق'] },
+            'ف': { boys:['فهد','فؤاد','فاروق','فيصل','فادي','فهمي','فائق','فضل'], girls:['فاطمة','فريال','فايزة','فدوى','فلك','فريدة','فوزية','فردوس'], object:['فأس','فانوس','فرن','فنجان','فستان','فاكس','فنار'], plant:['فجل','فول','فاصوليا','فستق','فلفل','فاكهة','فوفل'], animal:['فيل','فرس','فهد','فأر','فلامنجو','فقس','فرفر'], country:['فرنسا','فلسطين','فنلندا','فيتنام','فنزويلا','فيجي'] },
+            'ق': { boys:['قاسم','قتيبة','قدري','قيس','قحطان','قصي','قوام'], girls:['قمر','قبولة','قدرية','قمرية','قيثارة','قمرة','قبول'], object:['قلم','قفاز','قبعة','قارب','قالب','قداحة','قرطاس'], plant:['قرع','قثاء','قرفة','قنبيط','قبار','قرنفل','قصيص'], animal:['قرش','قرد','قط','قنفذ','قندس','قيقب','قراد'], country:['قطر','قبرص','قيرغيزستان'] },
+            'ك': { boys:['كمال','كريم','كامل','كايد','كاظم','كهلان','كدن'], girls:['كوكب','كفاية','كريمة','كاملة','كوثر','كليلة','كبيرة'], object:['كتاب','كرسي','كمبيوتر','كأس','كيس','كرة','كابلات'], plant:['كرفس','كركديه','كرز','كمثرى','كيوي','كاكاو','كستنا'], animal:['كلب','كسلان','كنغر','كوبرا','كركي','كوكتيل','كري'], country:['كندا','كوريا','كرواتيا','الكويت','كينيا','كولومبيا'] },
+            'ل': { boys:['لؤي','لطفي','لبيب','لطيف','لائق','لاحق','لاجين'], girls:['لينا','لمى','لجين','لولا','لطيفة','لبنى','ليان'], object:['لوحة','لابتوب','لعبة','لسان','لافتة','لاصق','لجام'], plant:['ليمون','لوز','لوبيا','لبلاب','ليتشي','لوتس','لفت'], animal:['ليمور','لقلق','لنورس','لوبستر','لحم','لاج','لجلاج'], country:['لبنان','ليبيا','لاتفيا','لوكسمبورغ','ليتوانيا'] },
+            'م': { boys:['محمود','محمد','مصطفى','مروان','مازن','مجدي','مالك','ماجد'], girls:['مريم','منى','مروة','مها','ملك','ملاك','ميساء','ميادة'], object:['مفتاح','مروحة','مرآة','مقعد','مكتب','مكنسة','ميكروفون'], plant:['موز','مانجو','مشمش','مليسة','مرمية','ميس','مرو'], animal:['ماعز','مهر','مدرع','مها','موسى','مجد','ملاك'], country:['مصر','المغرب','ماليزيا','مالي','موريتانيا','مالطا','ميانمار'] },
+            'ن': { boys:['نادر','ناصر','نبيل','نور','نهاد','نعمان','ناجي','نضال'], girls:['نور','نهى','ناهد','نوال','نادين','نسمة','نرجس','نادية'], object:['نظارة','نافذة','نقود','نقال','نافورة','نرد','ناقل'], plant:['نعناع','نخيل','نرجس','نارنج','نيم','نسرين','نفل'], animal:['نمل','نعامة','نسر','نمر','نحل','نون','نوم'], country:['نيجيريا','نيبال','نرويج','ناميبيا','نيوزيلندا'] },
+            'ه': { boys:['هشام','هاني','هيثم','هلال','همام','هادئ','هبة','هائل'], girls:['هند','هبة','هالة','هناء','هنادي','هيفاء','هيام','هيما'], object:['هاتف','هيكل','هرم','هواء','هاضوم','هدار','هدهد'], plant:['هيل','هليون','هندباء','هرد','هبيد','هشيم','هباب'], animal:['هدهد','هجين','هوز','هردون','هزبر','هجما','هيبر'], country:['هولندا','هنغاريا','هندوراس'] },
+            'و': { boys:['وليد','وائل','وسيم','وافي','واثق','وعد','وجدى'], girls:['وداد','وسام','وردة','وعد','ورود','وسن','وفاء','وئام'], object:['ورق','وسادة','وعاء','واجهة','وتد','واقي','واسطة'], plant:['ورد','وساب','وشيجة','وبر','وميض'], animal:['وطواط','وبر','ورل','وز','وروار','وقواق','وزغة'], country:['ويلز','واشنطن','واليس وفوتونا','وندورة'] },
+            'ي': { boys:['ياسر','يوسف','يامن','يحيى','يزن','يسري','يعقوب','ياقوت'], girls:['يسرى','ياسمين','يمان','ياقوت','يوبا','ياسمينا','يُمنى','يوسفية'], object:['يد','يخت','ياقوت','يافوخ','ياقة','ياردة','يرقة'], plant:['يقطين','ياسمين','يبروح','يلماز','يانسون'], animal:['يعسوب','يمامة','يسروع','يربوع','يأجوج','يحموم'], country:['اليمن','اليونان','اليابان','يوغوسلافيا'] }
+        };
+
+        const KNOWLEDGE = {};
+        for (let letter in RAW_KNOWLEDGE) {
+            KNOWLEDGE[letter] = {};
+            for (let category in RAW_KNOWLEDGE[letter]) {
+                KNOWLEDGE[letter][category] = RAW_KNOWLEDGE[letter][category].map(word => normalize(word));
+            }
+        }
+
+        function isValidAnswerWithReason(word, letter, category) {
+            if (!word || word.trim() === '') return { valid: false, reason: 'الحقل فارغ', status: 'pending' };
+            if (word.length < 2) return { valid: false, reason: 'أقل من حرفين', status: 'pending' };
+            
+            const normalizedWord = normalize(word);
+            const targetLetter = normalize(letter);
+            
+            if (normalizedWord.length === 0) return { valid: false, reason: 'لا توجد أحرف', status: 'pending' };
+            if (normalizedWord[0] !== targetLetter) return { valid: false, reason: `لا يبدأ بـ ${letter}`, status: 'pending' };
+            
+            const list = KNOWLEDGE[targetLetter]?.[category] || [];
+            if (list.length === 0) return { valid: false, reason: 'لا توجد كلمات', status: 'pending' };
+            
+            const found = list.some(item => item === normalizedWord);
+            if (!found) return { valid: false, reason: 'كلمة غير معتمدة', status: 'pending' };
+            
+            return { valid: true, reason: '✅ صحيح', status: true };
+        }
+
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('gameApp', () => ({
+                loading: true,
+                gameStarted: false,
+                playerName: '',
+                currentLetter: 'ا',
+                timer: 45,
+                myScore: 0,
+                myRank: '-',
+                topPlayers: [],
+                userId: null,
+                submitting: false,
+                showChannelsPopup: false,
+                intervalId: null,
+                lastRoundScore: 0,
+                toastMessage: '',
+                roundCount: 0,
+                firestoreReady: false,
+                realtimeConnected: false,
+                unsubscribeLeaderboard: null,
+                hasReturningPlayer: false,
+                showRoulette: false,
+                rouletteLetter: 'ا',
+                showInputFields: false,
+                
+                answers: { boys: '', girls: '', object: '', plant: '', animal: '', country: '' },
+                answerStatus: { boys: 'pending', girls: 'pending', object: 'pending', plant: 'pending', animal: 'pending', country: 'pending' },
+                joinedChannels: { physics: false, coding: false, grade7: false, grade8: false, grade9: false, grade10: false },
+                hasJoinedAnyChannel: false,
+                
+                db: null,
+                
+                showToast(msg) {
+                    this.toastMessage = msg;
+                    setTimeout(() => { this.toastMessage = ''; }, 3500);
+                },
+                
+                checkAnswerRealTime(category, value) {
+                    if (!value || value.length < 2) {
+                        this.answerStatus[category] = 'pending';
+                        return;
+                    }
+                    const result = isValidAnswerWithReason(value, this.currentLetter, category);
+                    this.answerStatus[category] = result.valid === true ? true : (result.valid === false ? false : 'pending');
+                },
+                
+                async startRoulette() {
+                    this.showRoulette = true;
+                    this.showInputFields = false;
+                    const rouletteDuration = 800;
+                    const intervalTime = 60;
+                    let startTime = Date.now();
+                    
+                    const interval = setInterval(() => {
+                        const randomLetter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
+                        this.rouletteLetter = randomLetter;
+                        
+                        if (Date.now() - startTime >= rouletteDuration) {
+                            clearInterval(interval);
+                            const finalLetter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
+                            this.currentLetter = finalLetter;
+                            this.rouletteLetter = finalLetter;
+                            
+                            setTimeout(() => {
+                                this.showRoulette = false;
+                                this.showInputFields = true;
+                                this.startTimer();
+                            }, 200);
+                        }
+                    }, intervalTime);
+                },
+                
+                async startNewGame() {
+                    if (!this.playerName || this.playerName.length < 3) {
+                        this.showToast("⚠️ الاسم يجب أن يكون 3 أحرف فأكثر");
+                        return;
+                    }
+                    
+                    let savedId = localStorage.getItem('gameUserId_' + this.playerName);
+                    if (savedId) {
+                        this.userId = savedId;
+                        this.hasReturningPlayer = true;
+                    } else {
+                        this.userId = 'p_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+                        localStorage.setItem('gameUserId_' + this.playerName, this.userId);
+                        this.hasReturningPlayer = false;
+                    }
+                    
+                    // التحقق إذا كان قد اشترك في أي قناة من قبل
+                    const joinedBefore = localStorage.getItem('hasJoinedAnyChannel_' + this.userId);
+                    this.hasJoinedAnyChannel = joinedBefore === 'true';
+                    
+                    if (this.firestoreReady && this.db) {
+                        try {
+                            if (this.hasReturningPlayer) {
+                                const userDoc = await getDoc(doc(this.db, 'GamePlayers_V2', this.userId));
+                                if (userDoc.exists()) {
+                                    const oldScore = userDoc.data().score || 0;
+                                    this.myScore = oldScore;
+                                    this.showToast(`👋 مرحباً بعودتك! نقاطك: ${oldScore}`);
+                                } else {
+                                    this.myScore = 0;
+                                    await setDoc(doc(this.db, 'GamePlayers_V2', this.userId), {
+                                        name: this.playerName, score: 0,
+                                        createdAt: serverTimestamp(),
+                                        lastActive: serverTimestamp()
+                                    });
+                                }
+                            } else {
+                                this.myScore = 0;
+                                await setDoc(doc(this.db, 'GamePlayers_V2', this.userId), {
+                                    name: this.playerName, score: 0,
+                                    createdAt: serverTimestamp(),
+                                    lastActive: serverTimestamp()
+                                });
+                            }
+                            
+                            await setDoc(doc(this.db, 'GamePlayers_V2', this.userId), {
+                                lastActive: serverTimestamp()
+                            }, { merge: true });
+                            
+                        } catch(e) {
+                            console.warn("⚠️ خطأ:", e.message);
+                            this.myScore = localStorage.getItem('backup_score_' + this.userId) ? parseInt(localStorage.getItem('backup_score_' + this.userId)) : 0;
+                        }
+                    }
+                    
+                    this.gameStarted = true;
+                    this.roundCount = 0;
+                    
+                    document.body.classList.add('game-active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    
+                    if (this.firestoreReady && this.db) {
+                        this.setupRealTimeLeaderboard();
+                        this.setupMyRankListener();
+                    }
+                    
+                    await this.startRoulette();
+                },
+                
+                setupRealTimeLeaderboard() {
+                    if (!this.firestoreReady || !this.db) return;
+                    if (this.unsubscribeLeaderboard) this.unsubscribeLeaderboard();
+                    
+                    try {
+                        const q = query(collection(this.db, 'GamePlayers_V2'), orderBy('score', 'desc'), limit(10));
+                        
+                        this.unsubscribeLeaderboard = onSnapshot(q, (snapshot) => {
+                            this.realtimeConnected = true;
+                            this.topPlayers = snapshot.docs.map(d => ({
+                                id: d.id,
+                                name: d.data().name || 'غير معروف',
+                                score: d.data().score || 0
+                            }));
+                        }, (error) => {
+                            console.warn("⚠️ خطأ:", error.message);
+                            this.realtimeConnected = false;
+                        });
+                    } catch(e) {
+                        console.warn("⚠️ خطأ:", e.message);
+                        this.realtimeConnected = false;
+                    }
+                },
+                
+                async setupMyRankListener() {
+                    if (!this.firestoreReady || !this.userId || !this.db) return;
+                    
+                    try {
+                        const myDocRef = doc(this.db, 'GamePlayers_V2', this.userId);
+                        const unsubscribeMyDoc = onSnapshot(myDocRef, (docSnapshot) => {
+                            if (docSnapshot.exists()) {
+                                const serverScore = docSnapshot.data().score || 0;
+                                if (serverScore > this.myScore) {
+                                    this.myScore = serverScore;
+                                }
+                            }
+                        });
+                        
+                        this.calculateMyRank();
+                        const rankInterval = setInterval(() => {
+                            if (!this.gameStarted) {
+                                clearInterval(rankInterval);
+                                return;
+                            }
+                            this.calculateMyRank();
+                        }, 5000);
+                        
+                        window.addEventListener('beforeunload', () => {
+                            unsubscribeMyDoc();
+                            clearInterval(rankInterval);
+                        });
+                        
+                    } catch(e) {
+                        console.warn("⚠️ خطأ:", e.message);
+                    }
+                },
+                
+                async calculateMyRank() {
+                    if (!this.firestoreReady || !this.userId || !this.db) return;
+                    
+                    try {
+                        const higherQuery = query(collection(this.db, 'GamePlayers_V2'), where('score', '>', this.myScore));
+                        const snapshot = await getCountFromServer(higherQuery);
+                        this.myRank = snapshot.data().count + 1;
+                    } catch(e) {
+                        console.warn("⚠️ خطأ:", e.message);
+                    }
+                },
+                
+                generateNewLetter() { 
+                    let newLetter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
+                    while (newLetter === this.currentLetter && LETTERS.length > 1) {
+                        newLetter = LETTERS[Math.floor(Math.random() * LETTERS.length)];
+                    }
+                    this.currentLetter = newLetter;
+                    this.answerStatus = { boys: 'pending', girls: 'pending', object: 'pending', plant: 'pending', animal: 'pending', country: 'pending' };
+                },
+                
+                startTimer() { 
+                    if (this.intervalId) clearInterval(this.intervalId); 
+                    this.timer = 45; 
+                    this.intervalId = setInterval(() => { 
+                        if (this.showChannelsPopup) return;
+                        if (this.timer <= 0) { 
+                            clearInterval(this.intervalId); 
+                            this.submitRound(); 
+                        } else this.timer--; 
+                    }, 1000); 
+                },
+                
+                calculateRoundScore() {
+                    let totalCorrect = 0;
+                    const cats = ['boys', 'girls', 'object', 'plant', 'animal', 'country'];
+                    for (let cat of cats) { 
+                        const result = isValidAnswerWithReason(this.answers[cat], this.currentLetter, cat);
+                        this.answerStatus[cat] = result.valid === true ? true : (result.valid === false ? false : 'pending');
+                        if (result.valid) totalCorrect++; 
+                    }
+                    return totalCorrect;
+                },
+                
+                async submitRound() {
+                    if (this.submitting) return;
+                    this.submitting = true;
+                    
+                    if (this.intervalId) {
+                        clearInterval(this.intervalId);
+                        this.intervalId = null;
+                    }
+                    
+                    try {
+                        const totalCorrect = this.calculateRoundScore();
+                        this.lastRoundScore = totalCorrect;
+                        
+                        if (totalCorrect > 0) {
+                            if (this.firestoreReady && this.db) {
+                                const newScore = this.myScore + totalCorrect;
+                                try {
+                                    await setDoc(doc(this.db, 'GamePlayers_V2', this.userId), { 
+                                        score: newScore, 
+                                        lastUpdate: serverTimestamp()
+                                    }, { merge: true });
+                                    
+                                    this.myScore = newScore;
+                                    this.showToast(`✅ أصبت ${totalCorrect} إجابات! +${totalCorrect} نقطة 🚀`);
+                                    await this.calculateMyRank();
+                                } catch(e) {
+                                    console.warn("⚠️ خطأ:", e.message);
+                                    this.myScore += totalCorrect;
+                                    this.showToast(`⚠️ تم حفظ +${totalCorrect} نقاط محلياً`);
+                                }
+                            } else {
+                                this.myScore += totalCorrect;
+                                this.showToast(`✅ أصبت ${totalCorrect} إجابات صحيحة!`);
+                            }
+                            
+                            localStorage.setItem('backup_score_' + this.userId, this.myScore);
+                        } else {
+                            this.showToast(`❌ لا توجد إجابات صحيحة للحرف ${this.currentLetter}`);
+                        }
+                        
+                        this.answers = { boys: '', girls: '', object: '', plant: '', animal: '', country: '' };
+                        this.generateNewLetter();
+                        
+                        this.roundCount++;
+                        
+                        // عرض نافذة القنوات بعد كل جولة فقط إذا لم يشترك في أي قناة من قبل
+                        if (!this.hasJoinedAnyChannel && !this.showChannelsPopup) {
+                            this.showChannelsPopup = true;
+                            if (this.intervalId) {
+                                clearInterval(this.intervalId);
+                                this.intervalId = null;
+                            }
+                        } else {
+                            // إذا كان مشترك بالفعل، ابدأ الجولة الجديدة مباشرة
+                            this.showInputFields = true;
+                            this.startTimer();
+                        }
+                        
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        
+                    } catch(e) {
+                        console.error("❌ خطأ:", e.message);
+                        this.showToast("❌ حدث خطأ، جاري إعادة التشغيل");
+                        this.startTimer();
+                    } finally {
+                        this.submitting = false;
+                    }
+                },
+                
+                testOnlyRound() {
+                    if (this.submitting) return;
+                    const totalCorrect = this.calculateRoundScore();
+                    this.showToast(`🔍 تحقق: ${totalCorrect} من 6 إجابات صحيحة`);
+                },
+                
+                async addChannelPoints(channel) {
+                    if (this.joinedChannels[channel]) return;
+                    this.joinedChannels[channel] = true;
+                    this.myScore += 10;
+                    this.showToast(`🎉 +10 نقاط للانضمام للقناة!`);
+                    
+                    // تسجيل أنه اشترك في قناة
+                    if (!this.hasJoinedAnyChannel) {
+                        this.hasJoinedAnyChannel = true;
+                        localStorage.setItem('hasJoinedAnyChannel_' + this.userId, 'true');
+                    }
+                    
+                    if (this.firestoreReady && this.db) {
+                        try {
+                            await setDoc(doc(this.db, 'GamePlayers_V2', this.userId), { 
+                                score: this.myScore, 
+                                lastUpdate: serverTimestamp()
+                            }, { merge: true });
+                            await this.calculateMyRank();
+                        } catch(e) {
+                            console.warn("⚠️ خطأ:", e.message);
+                        }
+                    }
+                },
+                
+                closeChannelsPopup() {
+                    this.showChannelsPopup = false;
+                    // إذا لم يشترك في أي قناة، ستظهر النافذة مرة أخرى بعد الجولة القادمة
+                    this.startTimer();
+                    this.showToast("📌 ستظهر النافذة مرة أخرى بعد الجولة القادمة");
+                    document.body.classList.add('game-active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+                
+                async init() {
+                    console.log('🟢 بدء التهيئة...');
+                    try {
+                        this.loading = true;
+                        const app = initializeApp(FIREBASE_CONFIG);
+                        this.db = getFirestore(app);
+                        this.firestoreReady = true;
+                        console.log("✅ Firebase connected");
+                    } catch (e) {
+                        console.warn("⚠️ Firebase error:", e.message);
+                        this.firestoreReady = false;
+                    } finally {
+                        this.loading = false;
+                    }
+                }
+            }));
+        });
+    </script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        // منع التمرير الأفقي نهائياً
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.overflowX = 'hidden';
+            
+            window.addEventListener('resize', function() {
+                const activeElement = document.activeElement;
+                if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+                    setTimeout(() => {
+                        activeElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
